@@ -30,4 +30,5 @@
 *.vrb
 *.xdy
 *.tdo
+*.el
 /main.pdf
