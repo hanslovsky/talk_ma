@@ -1,0 +1,86 @@
+\section{Cell Tracking}
+
+\begin{frame}{Definition}
+    \begin{itemize}
+          \item Extract cell lineages from embryo data.
+          \item Reconstruct fates of all cells in the embryo.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Existing Work}
+    Two approaches:
+    \begin{enumerate}
+          \item State space models.
+          \item Tracking-by-Assignment
+        \begin{itemize}
+              \item Chain Graph Tracking
+        \end{itemize}
+    \end{enumerate}
+\end{frame}
+
+\begin{frame}{Hypotheses Graph}
+    \begin{figure}
+        \centering
+        \begin{subfigure}[b]{0.44\textwidth}
+            \scalebox{0.62}{
+                \begin{tikzpicture}[minimum size=58pt,scale=0.45, every node/.style={scale=0.45, text=black, font=\LARGE}, thick]
+                    \input{images/cell_tracking/hypotheses-graph.tex}
+                \end{tikzpicture}
+            }
+        \end{subfigure}
+        \hfill
+        \begin{subfigure}[b]{0.44\textwidth}
+            \scalebox{0.62}{
+                \begin{tikzpicture}[minimum size=58pt,scale=0.45, every node/.style={scale=0.45, text=black, font=\LARGE}, thick]
+                    \input{images/cell_tracking/hypotheses-graph-after-inference.tex}
+                \end{tikzpicture}
+            }
+        \end{subfigure}
+        \caption{Hypotheses Graph for potential detections and assignments.}
+        \label{fig:cell-tracking-hypotheses}
+    \end{figure}
+\end{frame}
+
+\begin{frame}{Chain Graph Tracking}
+    \begin{figure}
+        \centering
+        \includegraphics[width=\textwidth]{images/cell_tracking/pipeline.pdf}
+        \caption{Chain graph tracking pipeline [SOURCE].}
+        \label{fig:chaingraph-pipeline}
+    \end{figure}
+\end{frame}
+
+\begin{frame}{Chain Graph Tracking}
+    \begin{figure}
+        \centering
+        \begin{subfigure}[b]{0.44\textwidth}
+            \centering
+            \includegraphics[width=\textwidth]{images/cell_tracking/fig_crf_less_nodes.pdf}
+            \caption{CRF}
+            \label{fig:chaingraph-crf}
+        \end{subfigure}
+        \hspace{5pt}
+        \begin{subfigure}[b]{0.44\textwidth}
+            \centering
+            \includegraphics[width=\textwidth]{images/cell_tracking/fig_chain_graph.pdf}
+            \caption{Chain Graph}
+            \label{fig:chaingraph-cg}
+        \end{subfigure}
+        \caption{Chain graph model. [SOURCE]}
+        \label{fig:chaingraph-model}
+    \end{figure}
+\end{frame}
+
+\begin{frame}{Chain Graph Tracking}
+    \begin{itemize}
+          \item Can distinguish between cells and noise.
+          \item Allows for tracking in oversegmented images.
+          \item Fails in case of undersegmentation, that is in the presence of merged or overlapping objects.
+    \end{itemize}
+\end{frame}
+
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "../main"
+%%% End: 

@@ -1,0 +1,166 @@
+\section{Conservation Tracking}
+
+\begin{frame}{Concept}
+    \begin{itemize}
+          \item Use multi-state variables instead of binary variables to model multiple objects per
+        detection.
+          \item Implement mass conservation laws to ensure consistency.
+          \item Resolve tracks that contain merge objects.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Workflow}
+    \begin{figure}
+        \centering
+        \begin{tikzpicture}
+            \node[anchor=south west, inner sep=0] (image) at (0,0)
+            {\includegraphics[width=\textwidth]{images/conservation/pipeline.png}};
+            \begin{scope}[x={(image.south east)},y={(image.north west)}]
+                \draw[red,line width=2pt,rounded corners, fill=red!20, fill opacity=0.3]
+                (0.81,0.20) rectangle (1.003,0.83);
+            \end{scope}
+        \end{tikzpicture}
+        \caption{Conservation Tracking Workflow [SOURCE]}
+        \label{fig:conservation-pipeline}
+    \end{figure}
+\end{frame}
+
+\begin{frame}{Factor Graph}
+    \begin{figure}
+        \centering
+        \includegraphics[width=\textwidth]{images/conservation/factor_graph.png}
+        \caption{Graphical model of the conservation tracking. [SOURCE]}
+        \label{fig:conservation-fg}
+    \end{figure}
+\end{frame}
+
+\begin{frame}{Merger Resolution}
+    \begin{figure}
+        \centering
+        \begin{subfigure}[b]{0.44\textwidth}
+            \centering
+            \scalebox{0.65}{
+                \input{images/conservation/convex_combination}
+            }
+            \caption{Convex Combination.}
+        \end{subfigure}
+        \hfill
+        \begin{subfigure}[b]{0.44\textwidth}
+            \centering
+            \scalebox{0.74}{
+                \input{images/conservation/gmm-gm-plate}
+            }
+            \caption{GMM - plate notation.}
+        \end{subfigure}
+        \caption{Gaussian Mixture Model.}
+        \label{fig:conservation-gmm}
+    \end{figure}
+    \begin{align*}
+        \label{eq:gmm-normal}
+        \mathsmaller{p(v|h)} &= \mathsmaller{\mathcal{N}({v}|\MUH , \SIGMAH )} \\ 
+        &\mathsmaller{= \frac{1}{\sqrt{\det(2\pi\SIGMAH )} }\exp\left(-\frac{1}{2}({v}-\MUH )^\intercal
+            \left(\SIGMAH\right) ^{-1} ({v}-\MUH )\right)}
+    \end{align*}
+\end{frame}
+
+\begin{frame}{Merger Resolution}
+    \begin{figure}
+        \centering
+        \scalebox{0.7}{
+            \begin{tikzpicture}[minimum size=58pt,scale=0.45, every node/.style={scale=0.45, font=\LARGE}, thick]
+                \input{images/conservation/hypotheses_original.tex}
+            \end{tikzpicture}
+        }
+        \caption{Original hypotheses graph.}
+        \label{fig:conservation-hyp-inferred}
+    \end{figure}
+\end{frame}
+
+\begin{frame}{Merger Resolution}
+    \begin{figure}
+        \centering
+        \scalebox{0.7}{
+            \begin{tikzpicture}[minimum size=58pt,scale=0.45, every node/.style={scale=0.45, font=\LARGE}, thick]
+                \input{images/conservation/hypotheses_after_inference.tex}
+            \end{tikzpicture}
+        }
+        \caption{Inferred configuration of the hypotheses graph.}
+        \label{fig:conservation-hyp-inferred}
+    \end{figure}
+\end{frame}
+
+\begin{frame}{Merger Resolution}
+    \begin{figure}
+        \centering
+        \scalebox{0.7}{
+            \begin{tikzpicture}[minimum size=58pt,scale=0.45, every node/.style={scale=0.45, font=\LARGE}, thick]
+                \input{images/conservation/hypotheses_subset.tex}
+            \end{tikzpicture}
+        }
+        \caption{Subset of the hypotheses graph that contains all merged objects.}
+        \label{fig:conservation-hyp-inferred}
+    \end{figure}
+\end{frame}
+
+\begin{frame}{Merger Resolution}
+    \begin{figure}
+        \centering
+        \scalebox{0.7}{
+            \begin{tikzpicture}[minimum size=58pt,scale=0.45, every node/.style={scale=0.45, font=\LARGE}, thick]
+                \input{images/conservation/hypotheses_subset_inferred.tex}
+            \end{tikzpicture}
+        }
+        \caption{Inferred configuration of the subset.}
+        \label{fig:conservation-hyp-inferred}
+    \end{figure}
+\end{frame}
+
+\begin{frame}{Merger Resolution}
+    \begin{figure}
+        \centering
+        \begin{subfigure}{0.3\textwidth}
+            \centering
+            \scalebox{0.65}{
+                \begin{tikzpicture}[minimum size=58pt,scale=0.45, every node/.style={scale=0.45, font=\LARGE}, thick]
+                    \input{images/conservation/division_detected.tex}
+                \end{tikzpicture}
+            }
+        \end{subfigure}
+        \hfill
+        \begin{subfigure}{0.3\textwidth}
+            \centering
+            \scalebox{0.65}{
+                \begin{tikzpicture}[minimum size=58pt,scale=0.45, every node/.style={scale=0.45, font=\LARGE}, thick]
+                    \input{images/conservation/division_duplicated.tex}
+                \end{tikzpicture}
+            }
+        \end{subfigure}
+        \hfill
+        \begin{subfigure}{0.3\textwidth}
+            \centering
+            \scalebox{0.65}{
+                \begin{tikzpicture}[minimum size=58pt,scale=0.45, every node/.style={scale=0.45, font=\LARGE}, thick]
+                    \input{images/conservation/division_inferred.tex}
+                \end{tikzpicture}
+            }
+        \end{subfigure}
+        \caption{Handling divisions.}
+        \label{fig:conservation-hyp-inferred}
+    \end{figure}
+\end{frame}
+
+\begin{frame}{Experimental Results}
+    \begin{table}
+        \centering
+        \input{images/conservation/gmm-fit-table}
+        \caption{Inferred configuration of the subset.}
+        \label{tab:conservation-gmm-fits}
+    \end{table}
+\end{frame}
+
+
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "../main"
+%%% End: 

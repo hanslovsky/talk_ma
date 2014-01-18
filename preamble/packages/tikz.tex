@@ -1,5 +1,43 @@
 \usepackage{tikz}
-\usetikzlibrary{arrows,snakes,backgrounds,patterns,matrix,shapes,fit,calc,shadows,plotmarks}
+\usetikzlibrary{arrows}
+\usetikzlibrary{snakes}
+\usetikzlibrary{backgrounds}
+\usetikzlibrary{patterns}
+\usetikzlibrary{matrix}
+\usetikzlibrary{shapes}
+\usetikzlibrary{fit}
+\usetikzlibrary{calc}
+\usetikzlibrary{shadows}
+\usetikzlibrary{plotmarks}
+\usetikzlibrary{positioning}
+
+
+% GMM
+\tikzstyle{main}=[circle, minimum size = 10mm, thick, draw =black!80, node distance = 16mm]
+\tikzstyle{param}=[rectangle, minimum size = 5mm, thick, draw =black!80, node distance = 16mm]
+\tikzstyle{connect}=[-latex, thick]
+
+
+% Hypotheses
+\definecolor{hypothesesbackground}{RGB}{99,124,179}
+\definecolor{hypothesesoneobject}{RGB}{255, 255, 0}
+\definecolor{hypothesestwoobjects}{RGB}{180, 0, 0}
+\definecolor{hypothesesthreeobjects}{RGB}{50, 50, 190}
+\definecolor{hypotheses_new_detection}{RGB}{0, 170, 0}
+\definecolor{hypothesesdivisionduplicate}{RGB}{255,0, 255}
+
+\tikzstyle{timestep}=[font=\huge]
+\tikzstyle{hypothesesdetection}=[draw, circle, fill=black!10, text=black]
+\tikzstyle{hypothesestransition}=[draw, thick, color=black!50]
+\tikzstyle{hypotheses_new_detection}=[hypothesesdetection, draw=hypotheses_new_detection, fill=hypotheses_new_detection!10]
+\tikzstyle{hypotheses_new_transition}=[hypothesestransition, loosely dotted]
+\tikzstyle{hypotheses_detection_not_involved}=[hypothesesdetection, dashed]
+\tikzstyle{hypotheses_transition_not_involved}=[hypothesestransition, dashed]
+\tikzstyle{hypotheses_one_object}=[hypothesesdetection, draw=hypothesesoneobject,fill=hypothesesoneobject!10]
+\tikzstyle{hypotheses_two_objects}=[hypothesesdetection, draw=hypothesestwoobjects, fill=hypothesestwoobjects!10]
+\tikzstyle{hypotheses_three_objects}=[hypothesesdetection, draw=hypothesesthreeobjects, fill=hypothesesthreeobjects!10]
+\tikzstyle{hypotheses_division_duplicate}=[hypothesesdetection, draw=hypothesesdivisionduplicate,
+fill=hypothesesdivisionduplicate!10]
 
 %%% Local Variables: 
 %%% mode: latex
