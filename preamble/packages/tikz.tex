@@ -12,6 +12,15 @@
 \usetikzlibrary{positioning}
 
 
+% layers
+\pgfdeclarelayer{lower}
+\pgfdeclarelayer{upper}
+\pgfdeclarelayer{bglower}
+\pgfdeclarelayer{bgupper}
+\pgfdeclarelayer{transition}
+\pgfsetlayers{background,bglower,lower,transition,bgupper,upper,main}
+
+
 % GMM
 \tikzstyle{main}=[circle, minimum size = 10mm, thick, draw =black!80, node distance = 16mm]
 \tikzstyle{param}=[rectangle, minimum size = 5mm, thick, draw =black!80, node distance = 16mm]
@@ -38,6 +47,48 @@
 \tikzstyle{hypotheses_three_objects}=[hypothesesdetection, draw=hypothesesthreeobjects, fill=hypothesesthreeobjects!10]
 \tikzstyle{hypotheses_division_duplicate}=[hypothesesdetection, draw=hypothesesdivisionduplicate,
 fill=hypothesesdivisionduplicate!10]
+
+
+% joint factor graph
+\definecolor{pinegreen}{cmyk}{0.92,0,0.59,0.25}
+\definecolor{royalblue}{cmyk}{1,0.50,0,0}
+\definecolor{lavander}{cmyk}{0,0.48,0,0}
+\definecolor{violet}{cmyk}{0.79,0.88,0,0}
+% \definecolor{assignmentyellow}{rgb}{0.9,0.65,0.2}
+% \definecolor{countgreen}{rgb}{0.1,0.7,0.3}
+% \definecolor{conflictred}{rgb}{0.9,0.15,0.1}
+\definecolor{conflictred}{RGB}{255,0,0}
+\definecolor{detectionblue}{RGB}{50,50,230}
+\definecolor{assignmentyellow}{RGB}{255,255,0}
+\definecolor{countgreen}{RGB}{0,170,0}
+\tikzstyle{cblue}=[circle, draw, thin,fill=cyan!20, scale=1.0]
+\tikzstyle{qgre}=[rectangle, draw, thin,fill=green!20, scale=0.8]
+\tikzstyle{conflict}=[rectangle, draw, thick, color=conflictred, fill=conflictred!80]
+\tikzstyle{count}=[rectangle, draw, thick, color=countgreen, fill=countgreen!80]
+\tikzstyle{detection}=[circle, draw, very thick, color=detectionblue, text=black, fill=detectionblue!10]
+% for gradient fill:top color=black!0, bottom color=black!60
+\tikzstyle{assignment}=[circle, draw, very thick, color=assignmentyellow, fill=assignmentyellow!10]
+% for gradient fill:top color=black!10, bottom color=black!25
+\tikzstyle{transfac}=[rectangle, draw, thick, fill=black, color=black]
+\tikzstyle{unaryfac}=[rectangle, draw, thick, color=detectionblue, fill=detectionblue!80]
+
+
+% joint
+\definecolor{darkred}{RGB}{120,0,0}
+\definecolor{darkgreen}{RGB}{0,120,0}
+\definecolor{darkblue}{rgb}{0,0,0.5}
+\tikzstyle{region_id}=[white,ultra thick,font=\bfseries]
+\tikzstyle{region_graph}=[circle, draw, color=darkgreen, fill=darkgreen!10, ultra thick, text=black]
+\tikzstyle{conflict_graph}=[circle, draw, color=darkred, fill=darkred!10, ultra thick, text=black]
+\tikzstyle{region_edge}=[region_graph, thick]
+\tikzstyle{conflict_edge}=[conflict_graph, thick]
+\tikzstyle{fg_det}=[hypotheses_three_objects,draw=blue!100,fill=blue!10,inner sep=2.4mm, thick]
+\tikzstyle{fg_tra}=[hypotheses_one_object, fill=hypothesesoneobject!20, thick, draw, inner
+sep=2.4mm]
+\tikzstyle{threed}=[black!70, dashed, ultra thin]
+\tikzstyle{plbg}=[rectangle, fill=darkblue!25, rounded corners=10pt, inner sep=0.5mm]
+\tikzstyle{pllbltxt}=[rectangle,black,draw=darkblue!25,fill=darkblue!12,rounded corners=8pt,inner
+sep=5,yshift=-13]
 
 %%% Local Variables: 
 %%% mode: latex
