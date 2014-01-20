@@ -11,6 +11,10 @@
 \usetikzlibrary{plotmarks}
 \usetikzlibrary{positioning}
 
+% transparent
+\tikzstyle{transparent_node} = [draw, circle, opacity=0.3, fill, minimum width=17pt]
+\tikzstyle{assignment_arrow} = [line width=1.2pt, ->, >=stealth, opacity=0.85]
+
 
 % layers
 \pgfdeclarelayer{lower}
@@ -77,9 +81,10 @@ fill=hypothesesdivisionduplicate!10]
 \definecolor{darkred}{RGB}{120,0,0}
 \definecolor{darkgreen}{RGB}{0,120,0}
 \definecolor{darkblue}{rgb}{0,0,0.5}
+\definecolor{MyCyan}{RGB}{0,255,255}
 \tikzstyle{region_id}=[white,ultra thick,font=\bfseries]
-\tikzstyle{region_graph}=[circle, draw, color=darkgreen, fill=darkgreen!10, ultra thick, text=black]
-\tikzstyle{conflict_graph}=[circle, draw, color=darkred, fill=darkred!10, ultra thick, text=black]
+\tikzstyle{region_graph}=[circle, draw, color=MyCyan, fill=MyCyan!15, ultra thick, text=black]
+\tikzstyle{conflict_graph}=[circle, draw, color=conflictred, fill=conflictred!15, ultra thick, text=black]
 \tikzstyle{region_edge}=[region_graph, thick]
 \tikzstyle{conflict_edge}=[conflict_graph, thick]
 \tikzstyle{fg_det}=[hypotheses_three_objects,draw=blue!100,fill=blue!10,inner sep=2.4mm, thick]

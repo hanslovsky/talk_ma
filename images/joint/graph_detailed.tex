@@ -1,4 +1,5 @@
 \begin{scope}
+    
     \begin{scope}[yshift=\distancebetweenlayers,
         every node/.append style={yslant=0.5,xslant=-1},
         yslant=0.5,xslant=-1]
@@ -39,20 +40,25 @@
         \end{pgfonlayer}
         \begin{pgfonlayer}{bgupper}
             \node[rectangle, color=black,thick, fill=hypothesesbackground!30, opacity=0.8, draw=black,
-            fit=(a1) (c2) (a5) (helpercoord1), inner sep=2, opacity=0.8, label={[xshift=5]above:{}}]
+            fit=(a1) (c2) (a5) (helpercoord1), inner sep=2, opacity=0.8, label={[xshift=15]above:{$t\phantom{+1}$}}]
             (bgup) {};
         \end{pgfonlayer}
     \end{scope}
+
     \begin{scope}[every node/.append style={yslant=0.5,xslant=-1},yslant=0.5,xslant=-1]
         \node[inner sep=0] (image2) {
             \phantom{\includegraphics[width=\scalingfactor\textwidth]{images/joint/79_seg_crop.png}}
         };
+        
         \begin{pgfonlayer}{bglower}
+            \uncover<2->{
             \node[rectangle, color=black,thick, fill=hypothesesbackground!30, opacity=0.8, draw=black,
-            fit=(a1) (c2) (a5) (helpercoord1), inner sep=2, opacity=0.8, shift=($(image2) - (image1)$), label={[xshift=15]above:{}}]
+            fit=(a1) (c2) (a5) (helpercoord1), inner sep=2, opacity=0.8, shift=($(image2) - (image1)$), label={[xshift=15]above:{$t+1$}}]
             (bglow) {};
+            }
         \end{pgfonlayer}
         \begin{pgfonlayer}{lower}
+            \uncover<2->{
             \begin{scope}[every node/.append style={scale=0.7}]
                 \node[fg_det, label={[font=\tiny]center:$X_6^{t+1}$}] (b1) at (image2.south east) {};
                 \node[fg_det, label={[font=\tiny]center:$X_7^{t+1}$}] (b2) at (image2.north east) {};
@@ -68,9 +74,12 @@
                 \path[count] (b2) edge (c3);
                 \path[count] (b3) edge (c3);
             \end{scope}
+            }
         \end{pgfonlayer}
     \end{scope}
+
     \begin{pgfonlayer}{transition}
+        \uncover<3->{
         \begin{scope}[every node/.append style={scale=0.9}]
             \node[fg_tra,label={[font=\tiny]center:$Y_{1,6}^t$},xshift=0] (trans1) at ($(a1)!0.55!(b1)$) {};
         \end{scope}
@@ -91,18 +100,13 @@
             \path[transfac] (trans2) edge (in2);
             \path[transfac] (in2) edge (b2.center);
         \end{scope}
+        }
     \end{pgfonlayer}
     \coordinate (base1) at (bglow.north west |- bglow.south west);
     \coordinate (base2) at (bglow.south east |- bglow.south west);
     % \draw [pllbl] (base1) -- (base2) node[black,midway,yshift=-0.6cm] {Factor Graph};
     % \path let \p1 = (base1.west), \p2 = (base2.east) in
     % node[pllbltxt, minimum width=\x2-\x1] (labelgraph) at ($(base1)!0.5!(base2)$) {Factor Graph};
-    \begin{pgfonlayer}{bglower}
-        \path[threed] (bglow.south east) -- (bgup.south east);
-        \path[threed] (bglow.north east) -- (bgup.north east);
-        \path[threed] (bglow.south west) -- (bgup.south west);
-        \path[threed] (bglow.north west) -- (bgup.north west);
-    \end{pgfonlayer}
 \end{scope}
 
 

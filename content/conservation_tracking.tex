@@ -1,12 +1,43 @@
 \section{Conservation Tracking}
 
 \begin{frame}{Concept}
-    \begin{itemize}
-          \item Use multi-state variables instead of binary variables to model multiple objects per
-        detection.
-          \item Implement mass conservation laws to ensure consistency.
-          \item Resolve tracks that contain merge objects.
-    \end{itemize}
+    \begin{figure}
+        \centering
+        \includegraphics[width=\textwidth]{images/conservation/factor_graph_big3.png}
+    \end{figure}
+\end{frame}
+
+\begin{frame}{Concept}
+    \begin{tikzpicture}
+        \node[label=left:$t\phantom{+1}$] (s1)
+        {\includegraphics[width=0.17\textwidth]{images/conservation/concept/chaingraph-01.png}};
+        \node[label=left:$t+1$, below=of s1.center] (s2)
+        {\includegraphics[width=0.17\textwidth]{images/conservation/concept/chaingraph-02.png}};
+        \node[label=left:$t+1$, below=of s2.center] (s3)
+        {\includegraphics[width=0.17\textwidth]{images/conservation/concept/chaingraph-03.png}};
+        \node[above=of s1.center] {Segmentation};
+        \uncover<2->{
+            \node[right=of s1.center, xshift=12pt] (t1)
+            {\includegraphics[width=0.17\textwidth]{images/conservation/concept/constracking-01.png}};
+            \node[ below=of t1.center] (t2)
+            {\includegraphics[width=0.17\textwidth]{images/conservation/concept/constracking-02.png}};
+            \node[below=of t2.center] (t3)
+            {\includegraphics[width=0.17\textwidth]{images/conservation/concept/constracking-03.png}};
+            \node[above=of t1.center] {Tracking};
+            \node[font=\boldmath, yshift=2pt] at (t2.center) {$2$};
+        }
+        \uncover<3->{
+            \node[right=of t1.center, xshift=12pt] (m1)
+            {\includegraphics[width=0.17\textwidth]{images/conservation/concept/resolution-01.png}};
+            \node[ below=of m1.center] (m2)
+            {\includegraphics[width=0.17\textwidth]{images/conservation/concept/resolution-02.png}};
+            \node[below=of m2.center] (m3)
+            {\includegraphics[width=0.17\textwidth]{images/conservation/concept/resolution-03.png}};
+            \node[above=of m1.center, align=center] {Resolved\\Mergers};
+            \node[font=\boldmath, yshift=2pt] at (m2.center) {$2$};
+        }
+    \end{tikzpicture}
+    SOURCE!!!
 \end{frame}
 
 \begin{frame}{Workflow}
@@ -20,31 +51,23 @@
                 (0.81,0.20) rectangle (1.003,0.83);
             \end{scope}
         \end{tikzpicture}
-        \caption{Conservation Tracking Workflow [SOURCE]}
+
         \label{fig:conservation-pipeline}
     \end{figure}
 \end{frame}
 
-\begin{frame}{Factor Graph}
-    \begin{figure}
-        \centering
-        \includegraphics[width=\textwidth]{images/conservation/factor_graph.png}
-        \caption{Graphical model of the conservation tracking. [SOURCE]}
-        \label{fig:conservation-fg}
-    \end{figure}
-\end{frame}
+% \begin{frame}{Factor Graph}
+%     \begin{figure}
+%         \centering
+%         \includegraphics[width=\textwidth]{images/conservation/factor_graph.png}
+%         \caption{Graphical model of the conservation tracking. [SOURCE]}
+%         \label{fig:conservation-fg}
+%     \end{figure}
+% \end{frame}
 
 \begin{frame}{Merger Resolution}
     \begin{figure}
         \centering
-        \begin{subfigure}[b]{0.44\textwidth}
-            \centering
-            \scalebox{0.65}{
-                \input{images/conservation/convex_combination}
-            }
-            \caption{Convex Combination.}
-        \end{subfigure}
-        \hfill
         \begin{subfigure}[b]{0.44\textwidth}
             \centering
             \scalebox{0.74}{
@@ -52,14 +75,21 @@
             }
             \caption{GMM - plate notation.}
         \end{subfigure}
-        \caption{Gaussian Mixture Model.}
+        \hfill
+        \begin{subfigure}[b]{0.44\textwidth}
+            \centering
+            \scalebox{0.65}{
+                \input{images/conservation/convex_combination}
+            }
+            \caption{Convex Combination.}
+        \end{subfigure}
         \label{fig:conservation-gmm}
     \end{figure}
     \begin{align*}
-        \label{eq:gmm-normal}
-        \mathsmaller{p(v|h)} &= \mathsmaller{\mathcal{N}({v}|\MUH , \SIGMAH )} \\ 
-        &\mathsmaller{= \frac{1}{\sqrt{\det(2\pi\SIGMAH )} }\exp\left(-\frac{1}{2}({v}-\MUH )^\intercal
-            \left(\SIGMAH\right) ^{-1} ({v}-\MUH )\right)}
+        p(v) = \sum_{h=1}^H\pi_h\cdot\mathcal{N}({v}|\MUH , \SIGMAH )
+        % \mathsmaller{p(v)} &= \mathsmaller{\mathcal{N}({v}|\MUH , \SIGMAH )} \\ 
+        % &\mathsmaller{= \frac{1}{\sqrt{\det(2\pi\SIGMAH )} }\exp\left(-\frac{1}{2}({v}-\MUH )^\intercal
+        %     \left(\SIGMAH\right) ^{-1} ({v}-\MUH )\right)}
     \end{align*}
 \end{frame}
 
@@ -158,58 +188,58 @@
     \end{table}
 \end{frame}
 
-\begin{frame}{Experimental Results}
-    \begin{table} % \small % \hfill{} \centering
-        \scalebox{0.8}{
-            \begin{tabular}{l||ccc|ccc}
-                \toprule
-                & \multicolumn{3}{c|}{\textbf{Overall:} 12,289 } & \multicolumn{3}{c}{\textbf{Divisions:} 380 }  \\
-                & Precision & Recall & $\fmeasure$ &
-                Precision & Recall & $\fmeasure$    \\
-                \hline
-                Kausler \etal & 0.96& 0.96 & 0.96  & 0.92     & 0.91 & 0.92    \\
-                Classifiers only*				        & \textit{N/A}   & \textit{N/A} & \textit{N/A} & 0.79 & 0.69 & 0.74 \\
-                Ours ($m=1$)						& 0.94        & 0.95 & 0.94  & 0.92      &
-                0.88 & 0.90   \\
-                \bottomrule
-            \end{tabular}
-        }
-        \caption{Results for Drosophila data set 1.}
-        \label{tab:gmm-result-a}
-    \end{table}
-\end{frame}
+% \begin{frame}{Experimental Results}
+%     \begin{table} % \small % \hfill{} \centering
+%         \scalebox{0.8}{
+%             \begin{tabular}{l||ccc|ccc}
+%                 \toprule
+%                 & \multicolumn{3}{c|}{\textbf{Overall:} 12,289 } & \multicolumn{3}{c}{\textbf{Divisions:} 380 }  \\
+%                 & Precision & Recall & $\fmeasure$ &
+%                 Precision & Recall & $\fmeasure$    \\
+%                 \hline
+%                 Kausler \etal & 0.96& 0.96 & 0.96  & 0.92     & 0.91 & 0.92    \\
+%                 Classifiers only*				        & \textit{N/A}   & \textit{N/A} & \textit{N/A} & 0.79 & 0.69 & 0.74 \\
+%                 Ours ($m=1$)						& 0.94        & 0.95 & 0.94  & 0.92      &
+%                 0.88 & 0.90   \\
+%                 \bottomrule
+%             \end{tabular}
+%         }
+%         \caption{Results for Drosophila data set 1.}
+%         \label{tab:gmm-result-a}
+%     \end{table}
+% \end{frame}
 
-\begin{frame}{Experimental Results}
-    \begin{table} % \small % \hfill{} \centering
-        \scalebox{0.8}{
-            \begin{tabular}{l||ccc|ccc}
-                \toprule
-                & \multicolumn{3}{c|}{\textbf{Moves}} & \multicolumn{3}{c}{\textbf{Divisions}}  \\
-                & Precision & Recall & $F_1$& Precision& Recall& $F_{1}$\\
-                \hline
-                Kausler \etal 	& 0.92		& 0.92 & 0.92  & 0.05      & 0.12 & 0.06    \\
-                Classifiers only 	& \textit{N/A}	& \textit{N/A} & \textit{N/A}  & 0.83      & 0.64 & 0.72    \\
-                Ours ($m=1$)						& 0.97        & 0.95 & 0.96  & 0.62     & 0.63 & 0.63    \\  
-                Ours ($m=2$)						& 0.97        & 0.97 & 0.97  & 0.53      & 0.79 & 0.64   \\ 
-                Ours ($m=3$)						& 0.97        & 0.97 & 0.97  & 0.70      & 0.76 & 0.73    \\ 
-                Ours ($m=4$)						& 0.97        & 0.97 & 0.97  & 0.65      & 0.77 & 0.71    \\ 
-                \midrule
-                & \multicolumn{3}{c|}{\textbf{Mergers} } & \multicolumn{3}{c}{\textbf{Resolved Mergers}} \\
-                & Precision& Recall& $F_{1}$ & Precision& Recall& $F_{1}$ \\
-                \hline
-                Kausler \etal & \textit{N/A}& \textit{N/A} & \textit{N/A} & \textit{N/A}& \textit{N/A} & \textit{N/A} \\
-                Classifiers only & 0.63 & 0.31 & 0.41 & \textit{N/A}& \textit{N/A} & \textit{N/A} \\
-                Ours ($m=1$) & \textit{N/A}& \textit{N/A} & \textit{N/A} & \textit{N/A}& \textit{N/A} & \textit{N/A}\\
-                Ours ($m=2$) & 0.71 & 0.54 & 0.61 & 0.72 & 0.61 & 0.66 \\
-                Ours ($m=3$) & 0.73 & 0.58 & 0.64  & 0.73      & 0.63 & 0.67 \\
-                Ours ($m=4$) & 0.78      & 0.59 & 0.67 & 0.74      & 0.63 & 0.60 \\
-                \bottomrule
-            \end{tabular}
-        }
-        \caption{Results for Drosophila data set 2.}
-        \label{tab:gmm-result-b}
-    \end{table}
-\end{frame}
+% \begin{frame}{Experimental Results}
+%     \begin{table} % \small % \hfill{} \centering
+%         \scalebox{0.8}{
+%             \begin{tabular}{l||ccc|ccc}
+%                 \toprule
+%                 & \multicolumn{3}{c|}{\textbf{Moves}} & \multicolumn{3}{c}{\textbf{Divisions}}  \\
+%                 & Precision & Recall & $F_1$& Precision& Recall& $F_{1}$\\
+%                 \hline
+%                 Kausler \etal 	& 0.92		& 0.92 & 0.92  & 0.05      & 0.12 & 0.06    \\
+%                 Classifiers only 	& \textit{N/A}	& \textit{N/A} & \textit{N/A}  & 0.83      & 0.64 & 0.72    \\
+%                 Ours ($m=1$)						& 0.97        & 0.95 & 0.96  & 0.62     & 0.63 & 0.63    \\  
+%                 Ours ($m=2$)						& 0.97        & 0.97 & 0.97  & 0.53      & 0.79 & 0.64   \\ 
+%                 Ours ($m=3$)						& 0.97        & 0.97 & 0.97  & 0.70      & 0.76 & 0.73    \\ 
+%                 Ours ($m=4$)						& 0.97        & 0.97 & 0.97  & 0.65      & 0.77 & 0.71    \\ 
+%                 \midrule
+%                 & \multicolumn{3}{c|}{\textbf{Mergers} } & \multicolumn{3}{c}{\textbf{Resolved Mergers}} \\
+%                 & Precision& Recall& $F_{1}$ & Precision& Recall& $F_{1}$ \\
+%                 \hline
+%                 Kausler \etal & \textit{N/A}& \textit{N/A} & \textit{N/A} & \textit{N/A}& \textit{N/A} & \textit{N/A} \\
+%                 Classifiers only & 0.63 & 0.31 & 0.41 & \textit{N/A}& \textit{N/A} & \textit{N/A} \\
+%                 Ours ($m=1$) & \textit{N/A}& \textit{N/A} & \textit{N/A} & \textit{N/A}& \textit{N/A} & \textit{N/A}\\
+%                 Ours ($m=2$) & 0.71 & 0.54 & 0.61 & 0.72 & 0.61 & 0.66 \\
+%                 Ours ($m=3$) & 0.73 & 0.58 & 0.64  & 0.73      & 0.63 & 0.67 \\
+%                 Ours ($m=4$) & 0.78      & 0.59 & 0.67 & 0.74      & 0.63 & 0.60 \\
+%                 \bottomrule
+%             \end{tabular}
+%         }
+%         \caption{Results for Drosophila data set.}
+%         \label{tab:gmm-result-b}
+%     \end{table}
+% \end{frame}
 
 \begin{frame}{Experimental Results}
     \begin{table} % \small % \hfill{} \centering
@@ -236,7 +266,7 @@
                 \bottomrule
             \end{tabular}
         }
-        \caption{Results for Mitocheck data set.}
+        % \caption{Results for Mitocheck data set.}
         \label{tab:gmm-result-c}
     \end{table}
 \end{frame}
