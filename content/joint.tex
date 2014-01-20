@@ -389,14 +389,14 @@ Two different kinds of undersegmentation:
 \end{frame}
 
 \begin{frame}
-    \frametitle{Current Status and Outlook}
-    \begin{tabular}{ll}
-        Challenge & Solution \\ \midrule
-    \end{tabular}
-    
-    Region Merging not perfect -> use vigra region merging instead?
-    Tractability -> different hypotheses graph
-    Parameters not optimal -> grid search
+    \frametitle{Open Challenges}
+    \renewcommand{\arraystretch}{1.5}
+    \begin{tabularx}{\textwidth}{X|X}
+        Challenge & Solution \\ \hline
+        Region merging errors propagated into tracking result  & Improve region merging (vigra) \\
+        Tractability & Change hypotheses generation \\
+        Parameters not optimal & Do exhaustive grid search \\
+    \end{tabularx}
 \end{frame}
 
 
