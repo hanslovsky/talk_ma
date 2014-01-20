@@ -299,6 +299,7 @@ Two different kinds of undersegmentation:
             \node[opacity=0.0, fg_det, scale=0.4] (fake) at (c1.center) {\phantom{$X$}};
             \path[transfac] (fake.west) edge (fake.east);
         }}
+    \begin{minipage}{0.71\textwidth}
     \begin{itemize}
           \item Random Variables
         \begin{itemize}
@@ -327,6 +328,17 @@ Two different kinds of undersegmentation:
                 \end{itemize}
         \end{itemize}
     \end{itemize}
+    \end{minipage}
+    \begin{minipage}{0.25\textwidth}
+        \newcommand{\distancebetweenlayers}{60}
+        \newcommand{\scalingfactor}{0.8}
+        \scalebox{0.55}{
+            \begin{tikzpicture}[every node/.append style={scale=0.98}]
+                \input{images/joint/graph_detailed_at_once.tex}
+            \end{tikzpicture}
+        }\hfill
+        \vfill
+    \end{minipage}
 \end{frame}
 
 \begin{frame}[shrink=25]
@@ -384,6 +396,21 @@ Two different kinds of undersegmentation:
                 \node[below=of seg3.center] (tra3) {\includegraphics[width=0.2\textwidth]{images/joint/res/sequence_02/ov_raw84.png}};
                 \node[align=center, left=of tra1.center] {Tracking};
             }
+        \end{tikzpicture}
+    \end{figure}
+\end{frame}
+
+\begin{frame}[shrink=25]
+    \frametitle{Experiments}
+    \begin{figure}
+        \centering
+        \begin{tikzpicture}
+            \node[label={[yshift=-2.5mm]above:\small{Segmentation}}] (seg1) {\includegraphics[width=0.32\textwidth]{images/joint/res/sequence_03/00_colored00_raw.png}};
+            \node[label={[yshift=-2.5mm]above:\small{Region Merging}}, right=of seg1] (seg2) {\includegraphics[width=0.32\textwidth]{images/joint/res/sequence_03/00_colored01_raw.png}};
+            \node[label={[yshift=-2.5mm]above:\small{Region Merging}}, below=of seg1, yshift=7.5mm] (seg3) {\includegraphics[width=0.32\textwidth]{images/joint/res/sequence_03/00_colored02_raw.png}};
+            \node[label={[yshift=-2.5mm]above:\small{Region Merging}}, right=of seg3] (seg4) {\includegraphics[width=0.32\textwidth]{images/joint/res/sequence_03/00_colored03_raw.png}};
+            \node[label={[yshift=-2.5mm]above:\small{Region Merging}}, below=of seg3, yshift=7.5mm] (seg5)  {\includegraphics[width=0.32\textwidth]{images/joint/res/sequence_03/00_colored04_raw.png}};
+            \node[label={[yshift=-2.5mm]above:\small{Tracking}}, right=of seg5] (tra1) {\includegraphics[width=0.32\textwidth]{images/joint/res/sequence_03/00_track_raw.png}};
         \end{tikzpicture}
     \end{figure}
 \end{frame}
