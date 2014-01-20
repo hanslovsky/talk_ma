@@ -36,7 +36,7 @@
     \begin{itemize}
           \item \emph{Segment} or \emph{superpixel/-voxel}: Smallest unit in a segmentation
           \item \emph{Region}: Any single segment or union of two neighboring regions
-          \item \emph{Conflict}: Two regions that contradict each other
+          \item \emph{Conflict}: Set of overlapping and thus contradicting regions
           \item \emph{Connected Component}: A region that has no neighbors (is completely surrounded
         by background)
     \end{itemize}
@@ -44,17 +44,124 @@
 
 \begin{frame}
     \frametitle{Definitions - Example}
-    Definitionen anhand von Beispielen erklaeren
+    \begin{figure}
+        \centering
+        \begin{subfigure}[t]{0.23\textwidth}
+            \centering
+            \includegraphics[width=\textwidth]{images/joint/overseg/75/02/raw_contrast.png}
+            % \caption{Raw data}
+        \end{subfigure}
+        ~
+        \begin{subfigure}[t]{0.23\textwidth}
+            \centering
+            
+                \begin{tikzpicture}[baseline=(image1.south)]
+                    {\uncover<2->{\node[anchor=south west,inner sep=0] (image1) {
+                        \includegraphics[width=\textwidth]{images/joint/overseg/75/02/colored00.png}};
+                    \begin{scope}[x={(image1.south east)},y={(image1.north west)}]
+                        \node[region_id] at (0.4, 0.75) {\huge{$1$}};
+                        \node[region_id] at (0.65, 0.7) {\huge{$2$}};
+                        \node[region_id] at (0.5, 0.32) {\huge{$3$}};
+                    \end{scope}}}
+                \end{tikzpicture}
+            % \caption{Segments}
+        \end{subfigure}
+        \hfill
+        \begin{subfigure}[t]{0.23\textwidth}
+            \centering
+                \begin{tikzpicture}[baseline=(image2.south)]
+                    {\uncover<3->{\node[anchor=south west,inner sep=0] (image2) {
+                        \includegraphics[width=\textwidth]{images/joint/overseg/75/02/colored01_all.png}};
+                    \begin{scope}[x={(image1.south east)},y={(image2.north west)}]
+                        \node[region_id] at (0.53, 0.73) {\huge{$4$}};
+                        \node[region_id] at (0.5, 0.32) {\huge{$3$}};
+                    \end{scope}}}
+                \end{tikzpicture}
+            % \caption{Segments}
+        \end{subfigure}
+        \hfill
+        \begin{subfigure}[t]{0.23\textwidth}
+            \centering
+            \begin{tikzpicture}[baseline=(image3.south)]
+                {\uncover<4->{\node[anchor=south west,inner sep=0] (image3) {
+                            \includegraphics[width=\textwidth]{images/joint/overseg/75/02/colored02.png}};
+                        \begin{scope}[x={(image1.south east)},y={(image3.north west)}]
+                            \node[region_id] at (0.5, 0.32) {\huge{$5$}};
+                        \end{scope}}}
+            \end{tikzpicture}
+            % \caption{Segments}
+        \end{subfigure}
+        % \caption{Definitions.}
+        \label{fig:joint-segments-example}
+    \end{figure}
+    \visible<1-4|only@1-4>{
+    \begin{itemize}
+          \item<2-4> Segments: $\{1,2,3\}$
+          \item<2|only@2> Regions: $\{1,2,3\}$
+          \item<3|only@3> Regions: $\{1,2,3,4\}$
+          \item<4|only@4> Regions: $\{1,2,3,4,5\}$
+          \item<4> Connected Component: $\{5\}$
+        % \item<3|only@3> Conflicts: $\{1,4\},\{2,4\}$
+          \item<4> Conflicts: $\{1,4,5\},\{2,4,5\},\{3,5\}$
+    \end{itemize}}
+\vspace{-50pt}
+    \visible<5|only@5>{
+        \begin{figure}
+            \centering
+            \begin{subfigure}[b]{0.48\textwidth}
+                \centering
+                \begin{tikzpicture}[baseline=(r1.south)]
+                    \node[region_graph] (r1) {$1$};
+                    \node[region_graph, right=of r1.west] (r2) {$2$};
+                    \node[region_graph, below=of r1.north] (r3) {$3$};
+                    \node[region_graph, right=of r3.west] (r4) {$4$};
+                    \node[region_graph, right=of r2.west] (r5) {$5$};
+                    \path[region_edge] (r1) edge (r2);
+                    \path[region_edge] (r2) edge (r3);
+                    \path[region_edge] (r3) edge (r4);
+                \end{tikzpicture}
+                \caption{Adjacency}
+            \end{subfigure}
+            ~
+            \begin{subfigure}[b]{0.48\textwidth}
+                \centering
+                \begin{tikzpicture}[baseline=(r1.south)]
+                    \node[conflict_graph] (r5) {$5$};
+                    \node[conflict_graph, right=of r5.west] (r1) {$1$};
+                    \node[conflict_graph, below=of r5.north] (r2) {$2$};
+                    \node[conflict_graph, right=of r2.west] (r4) {$4$};
+                    \node[conflict_graph, left=of r2.east] (r3) {$3$};
+                    \path[conflict_edge] (r5) edge (r1);
+                    \path[conflict_edge] (r5) edge (r2);
+                    \path[conflict_edge] (r5) edge (r3);
+                    \path[conflict_edge] (r5) edge (r4);
+                    \path[conflict_edge] (r4) edge (r1);
+                    \path[conflict_edge] (r4) edge (r2);
+                \end{tikzpicture}
+                \caption{Conflicts}
+            \end{subfigure}
+            
+            \caption{Graph Representation}
+        \end{figure}
+    }
 \end{frame}
 
-\begin{frame}
-    \frametitle{Oversegmentation}
-    Segmentation, Oversegmentation und Region Merging
-\end{frame}
+
 
 \begin{frame}
     \frametitle{Graphical Model}
-    BILD VOM GM
+    \begin{figure}
+        \centering
+        \newcommand{\distancebetweenlayers}{90}
+        \newcommand{\scalingfactor}{0.3}
+        \scalebox{0.9}{
+            \begin{tikzpicture}
+                \input{images/joint/graph_detailed.tex}
+            \end{tikzpicture}
+        }
+        \caption{Factor Graph}
+        \label{fig:joint-fg}
+    \end{figure}
 \end{frame}
 
 \begin{frame}

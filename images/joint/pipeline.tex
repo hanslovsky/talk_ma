@@ -24,7 +24,7 @@
         \input{images/joint/result.tex}
         \begin{pgfonlayer}{background}
             \node[plbg, fit=(bglow.south west) (bglow.north west)
-            (bgup.north east) (res1.south east) (labelres.south)] (bg2) {};
+            (bgup.north east) (res1.south east) (labelres.south east)] (bg2) {};
         \end{pgfonlayer}
         \draw[arrows=->, ultra thick, transform canvas={xshift=-15}] (bg2.north west) -- (bg2.south
         west) node[midway, xshift=-7] (t2) {\large{$t$}};
