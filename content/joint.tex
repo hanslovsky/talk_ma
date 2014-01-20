@@ -5,22 +5,16 @@
     \centering
     \begin{subfigure}[t]{0.48\textwidth}
         \includegraphics[width=\textwidth]{images/joint/mitocheck_255_max.pdf}
-        \caption{}
+        \caption{Missed cells}
         \label{fig:joint-underseg-no-detection}
     \end{subfigure}
     \hfill
     \begin{subfigure}[t]{0.48\textwidth}
         \includegraphics[width=\textwidth]{images/joint/mitocheck_030_max.pdf}
-        \caption{}
+        \caption{Merged objects}
         \label{fig:joint-underseg-mergers}
     \end{subfigure}
 \end{figure}
-Two different kinds of undersegmentation:
-\begin{itemize}
-      \item Missed cells
-      \item Merged objects
-\end{itemize}
-
 
 \end{frame}
 
@@ -113,21 +107,6 @@ Two different kinds of undersegmentation:
     \visible<5|only@5>{
         \begin{figure}
             \centering
-            \begin{subfigure}[b]{0.48\textwidth}
-                \centering
-                \begin{tikzpicture}[baseline=(r1.south)]
-                    \node[region_graph] (r1) {$3$};
-                    \node[region_graph, right=of r1.west] (r2) {$2$};
-                    \node[region_graph, below=of r1.north] (r3) {$1$};
-                    \node[region_graph, right=of r3.west] (r4) {$4$};
-                    \node[region_graph, right=of r2.west] (r5) {$5$};
-                    \path[region_edge] (r1) edge (r2);
-                    \path[region_edge] (r2) edge (r3);
-                    \path[region_edge] (r3) edge (r4);
-                \end{tikzpicture}
-                \caption{Adjacency}
-            \end{subfigure}
-            ~
             \begin{subfigure}[b]{0.48\textwidth}
                 \centering
                 \begin{tikzpicture}[baseline=(r1.south)]
@@ -424,6 +403,12 @@ Two different kinds of undersegmentation:
         Tractability & Change hypotheses generation \\
         Parameters not optimal & Do exhaustive grid search \\
     \end{tabularx}
+\end{frame}
+
+\begin{frame}
+    \begin{center}
+        Thank you!
+    \end{center}
 \end{frame}
 
 
