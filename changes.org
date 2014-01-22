@@ -1,0 +1,24 @@
+* Changes in preparation for Janelia
+  - p02: Divisions und einzelne Events erklären
+  - p03: False positive detection und merging event
+  - p04: Wie werden Nodes und edges erstellt?
+  - p06: andere Farben in Segmentation @t+2 und t+1 -> t+2
+  - p07: preprocessing entfernen
+  - p08: kürzer, nicht so ausführlich
+  - p09-15: In die Backup Slides verfrachten
+  - p17: Tabelle erklären, kurz und bündig und Ergebnisse gut verkaufen (bis hierher ca. 1/3 des
+    Talks)
+  - p18: GMM ist nur post-processing, doing it jointly is better
+  - p19: Graph wird global konstruiert!
+  - p20: Conflict Graph - direct als FG!
+  - p21: hierarchische Baeume nebendran
+  - p22: dito
+  - p24: weniger Details erklaeren
+  - p26: unterschiedliche Farben fuers Tracking
+  - p27: weglassen
+  - p28: Summary: Was ist gut? Model limitations (nicht: was haben wir nicht geschafft?) + Future
+    Work (Parameter learning, approximate solvers)
+    
+* General
+  - Besser verkaufen!
+  - Fuer Backup Slides: Faktoren und Hypotheses Graph der Merger Resolution
