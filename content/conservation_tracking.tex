@@ -26,8 +26,15 @@
             {\includegraphics[width=0.17\textwidth]{images/conservation/concept/constracking-03.png}};
             \node[above=of t1.center] {Tracking};
             \node[font=\boldmath, yshift=2pt] at (t2.center) {$2$};
+            \begin{scope}[overlay]%
+                \uncover<3->{
+                    \node[circle, draw=red!90, ultra thick, xshift=4, yshift=4,
+                    label={[xshift=-3,color=red!90]right:{\Huge{\xmark}}}]
+                    at (t3.center) {\phantom{$BLA$}};
+                }
+            \end{scope}
         }
-        \uncover<3->{
+        \uncover<4->{
             \node[right=of t1.center, xshift=12pt] (m1)
             {\includegraphics[width=0.17\textwidth]{images/conservation/concept/resolution-01.png}};
             \node[ below=of m1.center] (m2)
@@ -35,7 +42,24 @@
             \node[below=of m2.center] (m3)
             {\includegraphics[width=0.17\textwidth]{images/conservation/concept/resolution-03.png}};
             \node[above=of m1.center, align=center] {Resolved\\Mergers};
-            \node[font=\boldmath, yshift=2pt] at (m2.center) {$2$};
+            \visible<4>{
+                \node[font=\boldmath, yshift=2pt] at (m2.center) {$2$};
+            }
+            \begin{scope}[overlay]%
+                \uncover<5->{
+                    \node[ellipse, draw=blue, ultra thick, rotate=-30,
+                    xshift=3.2,yshift=11.2,scale=0.55] at (m2.center)
+                    {\phantom{$BLA$}};
+                    \node[ellipse, draw=yellow, ultra thick, rotate=-45,
+                    xshift=-3.2,yshift=-1.2,scale=0.65] at (m2.center)
+                    {\phantom{$BL$}};
+                }
+                \uncover<6->{
+                    \node[circle, draw=green!90, ultra thick, xshift=4, yshift=4,
+                    label={[xshift=-3,color=green!90]right:{\Huge{\cmark}}}]
+                    at (m3.center) {\phantom{$BLA$}};
+                }
+            \end{scope}
         }
     \end{tikzpicture}
 \end{frame}
@@ -45,10 +69,10 @@
         \centering
         \begin{tikzpicture}
             \node[anchor=south west, inner sep=0] (image) at (0,0)
-            {\includegraphics[width=\textwidth]{images/conservation/pipeline.png}};
+            {\includegraphics[width=\textwidth]{images/conservation/pipeline_no_preprocessing.png}};
             \begin{scope}[x={(image.south east)},y={(image.north west)}]
                 \draw[red,line width=2pt,rounded corners, fill=red!20, fill opacity=0.3]
-                (0.81,0.20) rectangle (1.003,0.83);
+                (0.728,0.04) rectangle (1.003,0.97);
             \end{scope}
         \end{tikzpicture}
 
@@ -56,14 +80,7 @@
     \end{figure}
 \end{frame}
 
-% \begin{frame}{Factor Graph}
-%     \begin{figure}
-%         \centering
-%         \includegraphics[width=\textwidth]{images/conservation/factor_graph.png}
-%         \caption{Graphical model of the conservation tracking. [SOURCE]}
-%         \label{fig:conservation-fg}
-%     \end{figure}
-% \end{frame}
+
 
 \begin{frame}{Merger Resolution - Gaussian Mixture Model}
     \begin{figure}
@@ -93,124 +110,7 @@
     \end{align*}
 \end{frame}
 
-\begin{frame}{Merger Resolution}
-    \begin{figure}
-        \centering
-        \scalebox{0.7}{
-            \begin{tikzpicture}[minimum size=58pt,scale=0.45, every node/.style={scale=0.45, font=\LARGE}, thick]
-                \input{images/conservation/hypotheses_original.tex}
-            \end{tikzpicture}
-        }
-        \caption{Original hypotheses graph.}
-        \label{fig:conservation-hyp-inferred}
-    \end{figure}
-\end{frame}
 
-\begin{frame}{Merger Resolution}
-    \begin{figure}
-        \centering
-        \scalebox{0.7}{
-            \begin{tikzpicture}[minimum size=58pt,scale=0.45, every node/.style={scale=0.45, font=\LARGE}, thick]
-                \input{images/conservation/hypotheses_after_inference.tex}
-            \end{tikzpicture}
-        }
-        \caption{Inferred configuration of the hypotheses graph.}
-        \label{fig:conservation-hyp-inferred}
-    \end{figure}
-\end{frame}
-
-\begin{frame}{Merger Resolution}
-    \begin{figure}
-        \centering
-        \scalebox{0.7}{
-            \begin{tikzpicture}[minimum size=58pt,scale=0.45, every node/.style={scale=0.45, font=\LARGE}, thick]
-                \input{images/conservation/hypotheses_subset.tex}
-            \end{tikzpicture}
-        }
-        \caption{Subset of the hypotheses graph that contains all merged objects.}
-        \label{fig:conservation-hyp-inferred}
-    \end{figure}
-\end{frame}
-
-\begin{frame}{Merger Resolution}
-    \begin{figure}
-        \centering
-        \scalebox{0.7}{
-            \begin{tikzpicture}[minimum size=58pt,scale=0.45, every node/.style={scale=0.45, font=\LARGE}, thick]
-                \input{images/conservation/hypotheses_subset_inferred.tex}
-            \end{tikzpicture}
-        }
-        \caption{Inferred configuration of the subset.}
-        \label{fig:conservation-hyp-inferred}
-    \end{figure}
-\end{frame}
-
-% \begin{frame}{Merger Resolution}
-%     \begin{figure}
-%         \centering
-%         \begin{subfigure}{0.3\textwidth}
-%             \centering
-%             \scalebox{0.65}{
-%                 \begin{tikzpicture}[minimum size=58pt,scale=0.45, every node/.style={scale=0.45, font=\LARGE}, thick]
-%                     \input{images/conservation/division_detected.tex}
-%                 \end{tikzpicture}
-%             }
-%         \end{subfigure}
-%         \hfill
-%         \begin{subfigure}{0.3\textwidth}
-%             \centering
-%             \scalebox{0.65}{
-%                 \begin{tikzpicture}[minimum size=58pt,scale=0.45, every node/.style={scale=0.45, font=\LARGE}, thick]
-%                     \input{images/conservation/division_duplicated.tex}
-%                 \end{tikzpicture}
-%             }
-%         \end{subfigure}
-%         \hfill
-%         \begin{subfigure}{0.3\textwidth}
-%             \centering
-%             \scalebox{0.65}{
-%                 \begin{tikzpicture}[minimum size=58pt,scale=0.45, every node/.style={scale=0.45, font=\LARGE}, thick]
-%                     \input{images/conservation/division_inferred.tex}
-%                 \end{tikzpicture}
-%             }
-%         \end{subfigure}
-%         \caption{Handling divisions.}
-%         \label{fig:conservation-hyp-inferred}
-%     \end{figure}
-% \end{frame}
-
-\begin{frame}{Merger Resolution - Divisions}
-    \begin{figure}
-        \centering
-        \scalebox{0.8}{
-            \begin{tikzpicture}[minimum size=58pt,scale=0.45, every node/.style={scale=0.45, font=\LARGE}, thick]
-                \input{images/conservation/division_detected.tex}
-            \end{tikzpicture}
-        }
-    \end{figure}
-\end{frame}
-
-\begin{frame}{Merger Resolution - Divisions}
-    \begin{figure}
-        \centering
-        \scalebox{0.8}{
-            \begin{tikzpicture}[minimum size=58pt,scale=0.45, every node/.style={scale=0.45, font=\LARGE}, thick]
-                \input{images/conservation/division_duplicated.tex}
-            \end{tikzpicture}
-        }
-    \end{figure}
-\end{frame}
-
-\begin{frame}{Merger Resolution - Divisions}
-    \begin{figure}
-        \centering
-        \scalebox{0.8}{
-            \begin{tikzpicture}[minimum size=58pt,scale=0.45, every node/.style={scale=0.45, font=\LARGE}, thick]
-                \input{images/conservation/division_inferred.tex}
-            \end{tikzpicture}
-        }
-    \end{figure}
-\end{frame}
 
 \begin{frame}{Experimental Results}
     \begin{table}
@@ -221,58 +121,6 @@
     \end{table}
 \end{frame}
 
-% \begin{frame}{Experimental Results}
-%     \begin{table} % \small % \hfill{} \centering
-%         \scalebox{0.8}{
-%             \begin{tabular}{l||ccc|ccc}
-%                 \toprule
-%                 & \multicolumn{3}{c|}{\textbf{Overall:} 12,289 } & \multicolumn{3}{c}{\textbf{Divisions:} 380 }  \\
-%                 & Precision & Recall & $\fmeasure$ &
-%                 Precision & Recall & $\fmeasure$    \\
-%                 \hline
-%                 Kausler \etal & 0.96& 0.96 & 0.96  & 0.92     & 0.91 & 0.92    \\
-%                 Classifiers only*				        & \textit{N/A}   & \textit{N/A} & \textit{N/A} & 0.79 & 0.69 & 0.74 \\
-%                 Ours ($m=1$)						& 0.94        & 0.95 & 0.94  & 0.92      &
-%                 0.88 & 0.90   \\
-%                 \bottomrule
-%             \end{tabular}
-%         }
-%         \caption{Results for Drosophila data set 1.}
-%         \label{tab:gmm-result-a}
-%     \end{table}
-% \end{frame}
-
-% \begin{frame}{Experimental Results}
-%     \begin{table} % \small % \hfill{} \centering
-%         \scalebox{0.8}{
-%             \begin{tabular}{l||ccc|ccc}
-%                 \toprule
-%                 & \multicolumn{3}{c|}{\textbf{Moves}} & \multicolumn{3}{c}{\textbf{Divisions}}  \\
-%                 & Precision & Recall & $F_1$& Precision& Recall& $F_{1}$\\
-%                 \hline
-%                 Kausler \etal 	& 0.92		& 0.92 & 0.92  & 0.05      & 0.12 & 0.06    \\
-%                 Classifiers only 	& \textit{N/A}	& \textit{N/A} & \textit{N/A}  & 0.83      & 0.64 & 0.72    \\
-%                 Ours ($m=1$)						& 0.97        & 0.95 & 0.96  & 0.62     & 0.63 & 0.63    \\  
-%                 Ours ($m=2$)						& 0.97        & 0.97 & 0.97  & 0.53      & 0.79 & 0.64   \\ 
-%                 Ours ($m=3$)						& 0.97        & 0.97 & 0.97  & 0.70      & 0.76 & 0.73    \\ 
-%                 Ours ($m=4$)						& 0.97        & 0.97 & 0.97  & 0.65      & 0.77 & 0.71    \\ 
-%                 \midrule
-%                 & \multicolumn{3}{c|}{\textbf{Mergers} } & \multicolumn{3}{c}{\textbf{Resolved Mergers}} \\
-%                 & Precision& Recall& $F_{1}$ & Precision& Recall& $F_{1}$ \\
-%                 \hline
-%                 Kausler \etal & \textit{N/A}& \textit{N/A} & \textit{N/A} & \textit{N/A}& \textit{N/A} & \textit{N/A} \\
-%                 Classifiers only & 0.63 & 0.31 & 0.41 & \textit{N/A}& \textit{N/A} & \textit{N/A} \\
-%                 Ours ($m=1$) & \textit{N/A}& \textit{N/A} & \textit{N/A} & \textit{N/A}& \textit{N/A} & \textit{N/A}\\
-%                 Ours ($m=2$) & 0.71 & 0.54 & 0.61 & 0.72 & 0.61 & 0.66 \\
-%                 Ours ($m=3$) & 0.73 & 0.58 & 0.64  & 0.73      & 0.63 & 0.67 \\
-%                 Ours ($m=4$) & 0.78      & 0.59 & 0.67 & 0.74      & 0.63 & 0.60 \\
-%                 \bottomrule
-%             \end{tabular}
-%         }
-%         \caption{Results for Drosophila data set.}
-%         \label{tab:gmm-result-b}
-%     \end{table}
-% \end{frame}
 
 \begin{frame}{Experimental Results}
     \begin{table} % \small % \hfill{} \centering
@@ -283,7 +131,7 @@
                 & Precision& Recall& $\fmeasure$ & Precision& Recall& $\fmeasure$ \\ \hline
                 Kausler \etal & 0.99 & 0.97 & 0.98 & 0.65 & 0.68 & 0.66 \\
                 Classifiers only & \textit{N/A} & \textit{N/A} & \textit{N/A} & 0.92 & 0.56 & 0.70 \\
-                Ours ($m=1$) & 0.99 & 0.97 & 0.98 & 0.68 & 0.71 & 0.70 \\
+                Ours ($m=1$)\footnote{\color{red}m: the maximum number of merged objects per connected component} & 0.99 & 0.97 & 0.98 & 0.68 & 0.71 & 0.70 \\
                 Ours ($m=2$) & 1.00 & 0.99 & 0.99 & 0.85 & 0.76 & 0.80 \\
                 Ours ($m=3$) & 1.00 & 0.99 & 0.99 & 0.85 & 0.77 & 0.80 \\
                 Ours ($m=4$) & 1.00 & 0.99 & 0.99 & 0.85 & 0.76 & 0.80 \\

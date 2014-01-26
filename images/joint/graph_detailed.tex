@@ -1,8 +1,8 @@
 \begin{scope}
     
     \begin{scope}[yshift=\distancebetweenlayers,
-        every node/.append style={yslant=0.5,xslant=-1},
-        yslant=0.5,xslant=-1]
+        every node/.append style={yslant=-0.5,xslant=1},
+        yslant=-0.5,xslant=1]
         \node[inner sep=0] (image1) {
             \phantom{\includegraphics[width=\scalingfactor\textwidth]{images/joint/78_seg_crop.png}}
         };
@@ -16,7 +16,7 @@
             \end{scope}
             \begin{scope}[every node/.append style={scale=0.65}]
                 \node[conflict,yshift=-5] (c1) at ($(a1)!0.5!(a5)$) {};
-                \node[conflict, right=of a3, xshift=-20, yshift=20] (c2) {};
+                \node[conflict, right=of a3, xshift=-10, yshift=-10] (c2) {};
                 \node[conflict, yshift=-20] (c3) at (a4) {};
                 \node[count, yshift=-20] (c4)  at ($(a2)!0.5!(a4)$) {};
                 
@@ -30,8 +30,8 @@
                 \path[conflict] (a1) edge (c1);
 
                 \path[conflict] (a2) edge (c2);
-                \path[conflict] (a4) edge[bend left=100] (c2);
-                \path[conflict] (a5) edge[bend left=95] coordinate[pos=0.65](helpercoord1) (c2);
+                \path[conflict] (a4) edge[bend left=50] (c2);
+                \path[conflict] (a5) edge[bend left=65] coordinate[pos=0.65](helpercoord1) (c2);
 
                 \path[conflict] (a3) edge[bend left=10] (c3);
                 \path[conflict] (a4) edge (c3);
@@ -45,7 +45,7 @@
         \end{pgfonlayer}
     \end{scope}
 
-    \begin{scope}[every node/.append style={yslant=0.5,xslant=-1},yslant=0.5,xslant=-1]
+    \begin{scope}[every node/.append style={yslant=-0.5,xslant=1},yslant=-0.5,xslant=1]
         \node[inner sep=0] (image2) {
             \phantom{\includegraphics[width=\scalingfactor\textwidth]{images/joint/79_seg_crop.png}}
         };
@@ -69,7 +69,7 @@
                 \path[conflict] (b3) edge (b2);
                 \node[conflict, label=below left:$\psi_{\text{det}}$] (c1) at ($(b1)!0.5!(b3)$) {};
                 \node[conflict] (c2) at ($(b2)!0.5!(b3)$) {};
-                \node[count, label=right:$\psi_{\text{count}}$] (c3) at ($(b1)!0.5!(b2)!0.3!(b3)$) {};
+                \node[count, label={[yshift=3mm]right:$\psi_{\text{count}}$}] (c3) at ($(b1)!0.5!(b2)!0.3!(b3)$) {};
                 \path[count] (b1) edge (c3);
                 \path[count] (b2) edge (c3);
                 \path[count] (b3) edge (c3);
@@ -84,8 +84,8 @@
             \node[fg_tra,label={[font=\tiny]center:$Y_{1,6}^t$},xshift=0] (trans1) at ($(a1)!0.55!(b1)$) {};
         \end{scope}
         \begin{scope}[every node/.append style={scale=0.7}]
-            \node[transfac, label=right:$\psi_{\text{out}}$] (out) at ($(a1.center)!0.5!(trans1)$) {};
-            \node[transfac, label=right:$\psi_{\text{in}}$] (in) at ($(b1.center)!0.5!(trans1)$) {};
+            \node[transfac, label=left:$\psi_{\text{out}}$] (out) at ($(a1.center)!0.5!(trans1)$) {};
+            \node[transfac] (in) at ($(b1.center)!0.5!(trans1)$) {};
             \path[transfac] (a1) edge (out.center);
             \path[transfac] (out) edge (trans1);
             \path[transfac] (trans1) edge (in);
@@ -95,7 +95,7 @@
             \node[fg_tra,label={[font=\tiny]center:$Y_{1,7}^t$},xshift=0,yshift=0] (trans2) at ($(out)!0.35!(b2)$) {};
         \end{scope}
         \begin{scope}[every node/.append style={scale=0.7}]
-            \node[transfac] (in2) at ($(b2.center)!0.5!(trans2)$) {};
+            \node[transfac, label={[yshift=3mm]right:$\psi_{\text{in}}$}] (in2) at ($(b2.center)!0.5!(trans2)$) {};
             \path[transfac] (out) edge (trans2);
             \path[transfac] (trans2) edge (in2);
             \path[transfac] (in2) edge (b2.center);

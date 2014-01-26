@@ -49,16 +49,6 @@
     \end{itemize}
 \end{frame}
 
-% \begin{frame}{Existing Work}
-%     Two approache:s
-%     \begin{enumerate}
-%           \item State space models.
-%           \item Tracking-by-Assignment
-%         \begin{itemize}
-%               \item Chain Graph Tracking
-%         \end{itemize}
-%     \end{enumerate}
-% \end{frame}
 
 \begin{frame}{Tracking-by-Assignment}
     \begin{figure}
@@ -70,19 +60,29 @@
 
 \begin{frame}{Hypotheses Graph}
     % \begin{figure}
-    \begin{center}
-        \only<1>{
+    \begin{center}%
+        \only<1-3>{%
             % \begin{subfigure}[b]{0.44\textwidth}
             %     \centering
                 \scalebox{0.92}{
-                    \begin{tikzpicture}[minimum size=58pt,scale=0.45, every node/.style={scale=0.45, text=black, font=\LARGE}, thick]
+                    \begin{tikzpicture}[minimum size=58pt,scale=0.45, every node/.style={scale=0.45, text=black, font=\LARGE}, thick]%
                         \input{images/cell_tracking/hypotheses-graph.tex}%
+                        \begin{scope}[overlay]% ignore this scope for bounding box calculation
+                        \visible<2-3>{
+                            \node[arrowstyle=2, rotate=30, below left=of x13, yshift=60, xshift=10]{Is this a cell?};
+                        }
+                        \visible<3>{
+                            \node[arrowstyle=2, rotate=160, xshift=-100]
+                            at ($(x13.south east)!0.5!(x22.south east)$)
+                            {\rotatebox{180}{Object $3$ moving to object $5$?}};
+                        }
+                        \end{scope}%
                     \end{tikzpicture}
                 }
             % \end{subfigure}
         }%
         % \hfill
-        \only<2>{
+        \only<4->{
             % \begin{subfigure}[b]{0.44\textwidth}
             %     \centering
                 \scalebox{0.92}{
@@ -98,42 +98,3 @@
     %     \label{fig:cell-tracking-hypotheses}
     % \end{figure}
 \end{frame}
-
-
-
-% \begin{frame}{Chain Graph Tracking}
-%     \begin{figure}
-%         \centering
-%         \begin{subfigure}[b]{0.44\textwidth}
-%             \centering
-%             \includegraphics[width=\textwidth]{images/cell_tracking/fig_crf_less_nodes.pdf}
-%             \caption{CRF}
-%             \label{fig:chaingraph-crf}
-%         \end{subfigure}
-%         \hspace{5pt}
-%         \begin{subfigure}[b]{0.44\textwidth}
-%             \centering
-%             \includegraphics[width=\textwidth]{images/cell_tracking/fig_chain_graph.pdf}
-%             \caption{Chain Graph}
-%             \label{fig:chaingraph-cg}
-%         \end{subfigure}
-%         \caption{Chain graph model. [SOURCE]}
-%         \label{fig:chaingraph-model}
-%     \end{figure}
-% \end{frame}
-
-% \begin{frame}{Chain Graph Tracking}
-%     to be discussed
-%     \begin{itemize}
-%           \item Can distinguish between cells and noise.
-%           \item Allows for tracking in oversegmented images.
-%           \item Fails in case of undersegmentation, that is in the presence of merged or overlapping objects.
-%     \end{itemize}
-%     [Kausler \etal (2012)] REFERENZ
-% \end{frame}
-
-
-%%% Local Variables: 
-%%% mode: latex
-%%% TeX-master: "../main"
-%%% End: 

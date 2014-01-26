@@ -2,19 +2,19 @@
 
 \begin{frame}{Motivation}
     \begin{figure}
-    \centering
-    \begin{subfigure}[t]{0.48\textwidth}
-        \includegraphics[width=\textwidth]{images/joint/mitocheck_255_max.pdf}
-        \caption{Missed cells}
-        \label{fig:joint-underseg-no-detection}
-    \end{subfigure}
-    \hfill
-    \begin{subfigure}[t]{0.48\textwidth}
-        \includegraphics[width=\textwidth]{images/joint/mitocheck_030_max.pdf}
-        \caption{Merged objects}
-        \label{fig:joint-underseg-mergers}
-    \end{subfigure}
-\end{figure}
+        \centering
+        \begin{subfigure}[t]{0.48\textwidth}
+            \includegraphics[width=\textwidth]{images/joint/mitocheck_255_max.pdf}
+            \caption{Missed cells}
+            \label{fig:joint-underseg-no-detection}
+        \end{subfigure}
+        \hfill
+        \begin{subfigure}[t]{0.48\textwidth}
+            \includegraphics[width=\textwidth]{images/joint/mitocheck_030_max.pdf}
+            \caption{Merged objects}
+            \label{fig:joint-underseg-mergers}
+        \end{subfigure}
+    \end{figure}
 
 \end{frame}
 
@@ -43,142 +43,171 @@
 
 \begin{frame}
     \frametitle{Definitions - Example}
-    \begin{figure}
-        \centering
-        \begin{subfigure}[t]{0.23\textwidth}
-            \centering
-            \includegraphics[width=\textwidth]{images/joint/overseg/75/02/raw_contrast.png}
-            % \caption{Raw data}
-        \end{subfigure}
-        ~
-        \begin{subfigure}[t]{0.23\textwidth}
-            \centering
-            
+    \begin{minipage}[t][0.4\textheight][t]{\textwidth}%
+        \begin{figure}%
+            \centering%
+            \begin{subfigure}[t]{0.23\textwidth}%
+                \centering%
+                \includegraphics[width=\textwidth]{images/joint/overseg/75/02/raw_contrast.png}
+            \end{subfigure}%
+            \hfill
+            \begin{subfigure}[t]{0.23\textwidth}
+                \centering
                 \begin{tikzpicture}[baseline=(image1.south)]
                     {\uncover<2->{\node[anchor=south west,inner sep=0] (image1) {
-                        \includegraphics[width=\textwidth]{images/joint/overseg/75/02/colored00.png}};
-                    \begin{scope}[x={(image1.south east)},y={(image1.north west)}]
-                        \node[region_id] at (0.4, 0.75) {\huge{$3$}};
-                        \node[region_id] at (0.65, 0.7) {\huge{$2$}};
-                        \node[region_id] at (0.5, 0.32) {\huge{$1$}};
-                    \end{scope}}}
-                \end{tikzpicture}
-            % \caption{Segments}
-        \end{subfigure}
-        \hfill
-        \begin{subfigure}[t]{0.23\textwidth}
-            \centering
+                                \includegraphics[width=\textwidth]{images/joint/overseg/75/02/colored00.png}};
+                            \begin{scope}[x={(image1.south east)},y={(image1.north west)}]
+                                \node[region_id] at (0.4, 0.75) {\huge{$3$}};
+                                \node[region_id] at (0.65, 0.7) {\huge{$2$}};
+                                \node[region_id] at (0.5, 0.32) {\huge{$1$}};
+                            \end{scope}}}%
+                \end{tikzpicture}%
+            \end{subfigure}%
+            \hfill%
+            \begin{subfigure}[t]{0.23\textwidth}
+                \centering
                 \begin{tikzpicture}[baseline=(image2.south)]
                     {\uncover<3->{\node[anchor=south west,inner sep=0] (image2) {
-                        \includegraphics[width=\textwidth]{images/joint/overseg/75/02/colored01_all.png}};
-                    \begin{scope}[x={(image1.south east)},y={(image2.north west)}]
-                        \node[region_id] at (0.53, 0.73) {\huge{$4$}};
-                        \node[region_id] at (0.5, 0.32) {\huge{$1$}};
-                    \end{scope}}}
-                \end{tikzpicture}
-            % \caption{Segments}
-        \end{subfigure}
-        \hfill
-        \begin{subfigure}[t]{0.23\textwidth}
-            \centering
-            \begin{tikzpicture}[baseline=(image3.south)]
-                {\uncover<4->{\node[anchor=south west,inner sep=0] (image3) {
-                            \includegraphics[width=\textwidth]{images/joint/overseg/75/02/colored02.png}};
-                        \begin{scope}[x={(image1.south east)},y={(image3.north west)}]
-                            \node[region_id] at (0.5, 0.32) {\huge{$5$}};
-                        \end{scope}}}
-            \end{tikzpicture}
-            % \caption{Segments}
-        \end{subfigure}
-        % \caption{Definitions.}
-        \label{fig:joint-segments-example}
-    \end{figure}
-    \visible<2-4|only@2-4>{
-    \begin{itemize}
-          \item<2-4> Segments: $\{1,2,3\}$
-          \item<2|only@2> Regions: $\{1,2,3\}$
-          \item<3|only@3> Regions: $\{1,2,3,4\}$
-          \item<4|only@4> Regions: $\{1,2,3,4,5\}$
-          \item<4> Connected Component: $\{5\}$
-        % \item<3|only@3> Conflicts: $\{1,4\},\{2,4\}$
-          \item<4> Conflicts: $\{2,4,5\},\{3,4,5\},\{1,5\}$
-    \end{itemize}}
-\vspace{-50pt}
-    \visible<5|only@5>{
-        \begin{figure}
-            \centering
-            \begin{subfigure}[b]{0.48\textwidth}
+                                \includegraphics[width=\textwidth]{images/joint/overseg/75/02/colored01_all.png}};
+                            \begin{scope}[x={(image1.south east)},y={(image2.north west)}]
+                                \node[region_id] at (0.53, 0.73) {\huge{$4$}};
+                                \node[region_id] at (0.5, 0.32) {\huge{$1$}};
+                            \end{scope}}}
+                \end{tikzpicture}%
+            \end{subfigure}%
+            \hfill%
+            \begin{subfigure}[t]{0.23\textwidth}
                 \centering
-                \begin{tikzpicture}[baseline=(r1.south)]
-                    \node[conflict_graph] (r5) {$5$};
-                    \node[conflict_graph, right=of r5.west] (r1) {$3$};
-                    \node[conflict_graph, below=of r5.north] (r2) {$2$};
-                    \node[conflict_graph, right=of r2.west] (r4) {$4$};
-                    \node[conflict_graph, left=of r2.east] (r3) {$1$};
-                    \path[conflict_edge] (r5) edge (r1);
-                    \path[conflict_edge] (r5) edge (r2);
-                    \path[conflict_edge] (r5) edge (r3);
-                    \path[conflict_edge] (r5) edge (r4);
-                    \path[conflict_edge] (r4) edge (r1);
-                    \path[conflict_edge] (r4) edge (r2);
-                \end{tikzpicture}
-                \caption{Conflicts}
-            \end{subfigure}
-            
-            % \caption{Graph Representation}
-        \end{figure}
-    }
+                \begin{tikzpicture}[baseline=(image3.south)]
+                    {\uncover<4->{\node[anchor=south west,inner sep=0] (image3) {
+                                \includegraphics[width=\textwidth]{images/joint/overseg/75/02/colored02.png}};
+                            \begin{scope}[x={(image1.south east)},y={(image3.north west)}]
+                                \node[region_id] at (0.5, 0.32) {\huge{$5$}};
+                            \end{scope}}}
+                \end{tikzpicture}%
+            \end{subfigure}%
+            \label{fig:joint-segments-example}
+        \end{figure}%
+    \end{minipage}%
+    \begin{overprint}%
+        %\only<1-4>{
+        \begin{itemize}%
+              \item<2-4|only@2-4> Segments: $\{1,2,3\}$%
+              \item<2|only@2> Regions: $\{1,2,3\}$%
+              \item<3|only@3> Regions: $\{1,2,3,4\}$%
+              \item<4|only@4> Regions: $\{1,2,3,4,5\}$%
+              \item<4> Connected Component: $\{5\}$%
+            %   \item<3|only@3> Conflicts: $\{1,4\},\{2,4\}$%
+              \item<4> Conflicts: $\{2,4,5\},\{3,4,5\},\{1,5\}$%
+        \end{itemize}%}%
+        % \vspace{-50pt}
+        \visible<5-|only@5->{
+            \begin{figure}
+                \centering
+                \begin{subfigure}[b]{0.40\textwidth}
+                    \begin{flushleft}
+                    \scalebox{0.950}{
+                    \begin{tikzpicture}[baseline=(bl)]
+                        \node[conflict_graph] (r5) {$5$};
+                        \node[conflict_graph, right=of r5] (r1) {$3$};
+                        \node[conflict_graph, below=of r5] (r2) {$2$};
+                        \node[conflict_graph, right=of r2] (r4) {$4$};
+                        \node[conflict_graph, left=of r2] (r3) {$1$};
+                        \path[conflict_edge] (r5) edge (r1);
+                        \path[conflict_edge] (r5) edge (r2);
+                        \path[conflict_edge] (r5) edge (r3);
+                        \path[conflict_edge] (r5) edge (r4);
+                        \path[conflict_edge] (r4) edge (r1);
+                        \path[conflict_edge] (r4) edge (r2);
+                        \coordinate[below=of r1.south] (bl);
+                    \end{tikzpicture}}
+                    \end{flushleft}
+                \end{subfigure}%
+                %\hfill%
+                \visible<6-|only@6->{
+                    \scalebox{0.7}{
+                    \tikzfancyarrow{Factor Graph}}%
+                %\hfill%
+                \begin{subfigure}[b]{0.40\textwidth}
+                    \centering
+                    \begin{flushright}
+                    \scalebox{0.950}{
+                    \begin{tikzpicture}[baseline=(bl)]
+                        \node[conflict_graph] (r5) {$5$};
+                        \node[conflict_graph, right=of r5] (r1) {$3$};
+                        \node[conflict_graph, below=of r5] (r2) {$2$};
+                        \node[conflict_graph, right=of r2] (r4) {$4$};
+                        \node[conflict_graph, left=of r2] (r3) {$1$};
+                        \node[conflict] (c15) at ($(r3)!0.5!(r5)$) {};
+                        \node[conflict, xshift=9, yshift=9] (c245) at (r2.north east) {};
+                        \node[conflict, xshift=-9, yshift=-9] (c345) at (r1.south west) {};
+                        \path[conflict_edge] (r5) edge (c15);
+                        \path[conflict_edge] (r3) edge (c15);
+                        \path[conflict_edge] (r5) edge (c245);
+                        \path[conflict_edge] (r4) edge (c245);
+                        \path[conflict_edge] (r2) edge (c245);
+                        \path[conflict_edge] (r5) edge (c345);
+                        \path[conflict_edge] (r4) edge (c345);
+                        \path[conflict_edge] (r1) edge (c345);
+                        \coordinate[below=of r1.south] (bl);
+                    \end{tikzpicture}}
+                \end{flushright}%
+                \end{subfigure}}%
+            \end{figure}
+        }%
+    \end{overprint}%
 \end{frame}
 
 
 \begin{frame}
     \frametitle{From Regions to Factor Graph}
-    \begin{figure}
-        \centering
-        \begin{subfigure}[t]{0.23\textwidth}
+    \begin{minipage}[t][0.4\textheight][t]{\textwidth}%
+        \begin{figure}
             \centering
-            \includegraphics[width=\textwidth]{images/joint/overseg/75/02/raw_contrast.png}
-            % \caption{Raw data}
-        \end{subfigure}
-        ~
-        \begin{subfigure}[t]{0.23\textwidth}
-            \centering
-            \begin{tikzpicture}[baseline=(image1.south)]
-                \node[anchor=south west,inner sep=0] (image1) {
-                    \includegraphics[width=\textwidth]{images/joint/overseg/75/02/colored00.png}};
-                \begin{scope}[x={(image1.south east)},y={(image1.north west)}]
-                    \node[region_id] at (0.4, 0.75) {\huge{$3$}};
-                    \node[region_id] at (0.65, 0.7) {\huge{$2$}};
-                    \node[region_id] at (0.5, 0.32) {\huge{$1$}};
-                \end{scope}
-            \end{tikzpicture}
-        \end{subfigure}
-        \hfill
-        \begin{subfigure}[t]{0.23\textwidth}
-            \centering
-            \begin{tikzpicture}[baseline=(image2.south)]
-                \node[anchor=south west,inner sep=0] (image2) {
-                    \includegraphics[width=\textwidth]{images/joint/overseg/75/02/colored01_all.png}};
-                \begin{scope}[x={(image1.south east)},y={(image2.north west)}]
-                    \node[region_id] at (0.53, 0.73) {\huge{$4$}};
-                    \node[region_id] at (0.5, 0.32) {\huge{$1$}};
-                \end{scope}
-            \end{tikzpicture}
-            % \caption{Segments}
-        \end{subfigure}
-        \begin{subfigure}[t]{0.23\textwidth}
-            \centering
-            \begin{tikzpicture}[baseline=(image3.south)]
-                \node[anchor=south west,inner sep=0] (image3) {
-                    \includegraphics[width=\textwidth]{images/joint/overseg/75/02/colored02.png}};
-                \begin{scope}[x={(image1.south east)},y={(image3.north west)}]
-                    \node[region_id] at (0.5, 0.32) {\huge{$5$}};
-                \end{scope}
-            \end{tikzpicture}
-            % \caption{Segments}
-        \end{subfigure}
-        % \caption{Definitions.}
-    \end{figure}
+            \begin{subfigure}[t]{0.23\textwidth}
+                \centering
+                \includegraphics[width=\textwidth]{images/joint/overseg/75/02/raw_contrast.png}
+                % \caption{Raw data}
+            \end{subfigure}%
+            \hfill%
+            \begin{subfigure}[t]{0.23\textwidth}
+                \centering
+                \begin{tikzpicture}[baseline=(image1.south)]
+                    \node[anchor=south west,inner sep=0] (image1) {
+                        \includegraphics[width=\textwidth]{images/joint/overseg/75/02/colored00.png}};
+                    \begin{scope}[x={(image1.south east)},y={(image1.north west)}]
+                        \node[region_id] at (0.4, 0.75) {\huge{$3$}};
+                        \node[region_id] at (0.65, 0.7) {\huge{$2$}};
+                        \node[region_id] at (0.5, 0.32) {\huge{$1$}};
+                    \end{scope}
+                \end{tikzpicture}%
+            \end{subfigure}%
+            \hfill%
+            \begin{subfigure}[t]{0.23\textwidth}
+                \centering
+                \begin{tikzpicture}[baseline=(image2.south)]
+                    \node[anchor=south west,inner sep=0] (image2) {
+                        \includegraphics[width=\textwidth]{images/joint/overseg/75/02/colored01_all.png}};
+                    \begin{scope}[x={(image1.south east)},y={(image2.north west)}]
+                        \node[region_id] at (0.53, 0.73) {\huge{$4$}};
+                        \node[region_id] at (0.5, 0.32) {\huge{$1$}};
+                    \end{scope}
+                \end{tikzpicture}%
+            \end{subfigure}%
+            \hfill%
+            \begin{subfigure}[t]{0.23\textwidth}
+                \centering
+                \begin{tikzpicture}[baseline=(image3.south)]
+                    \node[anchor=south west,inner sep=0] (image3) {
+                        \includegraphics[width=\textwidth]{images/joint/overseg/75/02/colored02.png}};
+                    \begin{scope}[x={(image1.south east)},y={(image3.north west)}]
+                        \node[region_id] at (0.5, 0.32) {\huge{$5$}};
+                    \end{scope}
+                \end{tikzpicture}%
+            \end{subfigure}%
+        \end{figure}
+    \end{minipage}%
+    % 
     \begin{figure}
         \centering
         \newcommand{\scalingfactor}{0.3}
@@ -193,56 +222,82 @@
 
 \begin{frame}
     \frametitle{Graphical Model}
-        \centering
-        \newcommand{\distancebetweenlayers}{90}
-        \newcommand{\scalingfactor}{0.3}
-        \scalebox{0.8}{
-            \begin{tikzpicture}
-                \input{images/joint/graph_detailed.tex}
-            \end{tikzpicture}
-        }%
-        \vfill
-        % \caption{Factor Graph}
+    \centering
+    \newcommand{\distancebetweenlayers}{90}
+    \newcommand{\scalingfactor}{0.3}
+    \scalebox{0.8}{
+        \begin{tikzpicture}
+            \input{images/joint/graph_detailed.tex}
+        \end{tikzpicture}
+    }\hfill%
+    \scalebox{0.8}{
+        \begin{tikzpicture}%
+            \visible<1->{
+                \begin{scope}
+                    \node[circle, draw, thick] (a11) {$1$};
+                    \node[circle, draw, thick, right=of a11, xshift=-15] (a12) {$2$};
+                    \node[circle, draw, thick, right=of a12, xshift=-15] (a13) {$3$};
+                    \node[circle, draw, thick, above=of a12, yshift=10] (a15) {$5$};
+                    \node[circle, draw, thick] (a14) at ($(a15)!0.5!(a13)$) {$4$};
+                    \path (a11) edge (a15);
+                    \path (a14) edge (a15);
+                    \path (a12) edge (a14);
+                    \path (a13) edge (a14);
+                \end{scope}
+            }%
+            \visible<2->{
+                \begin{scope}[yshift=-120]
+                    \node[circle, draw, thick] (a21) {$6$};
+                    \node[circle, draw, thick, opacity=0.0, right=of a21, xshift=-15] (fake1) {$6$};
+                    \node[circle, draw, thick, right=of fake1, xshift=-15] (a22) {$7$};
+                    \node[circle, draw, thick, above=of fake1, yshift=10] (a23) {$8$};
+                    \path (a21) edge (a23);
+                    \path (a22) edge (a23);
+                \end{scope}
+            }%
+        \end{tikzpicture}}%
+    \vfill
+    % \caption{Factor Graph}
     \begin{minipage}{0.33\textwidth}
         \begin{tabular}{ll}
-        \tikz[baseline, inner sep=1pt]\node[scale=0.4, thick, draw, circle, fg_det, text=black] at
-        (0,2.5pt){$X$}; & Detection \\
-        \uncover<3->{\tikz[baseline, inner sep=1pt]\node[scale=0.4, thick, draw, circle, fg_tra, text=black] at
-        (0,2.5pt){$Y$};} & \uncover<3->{Assignment} \\
+            \tikz[baseline, inner sep=1pt]\node[scale=0.4, thick, draw, circle, fg_det, text=black] at
+            (0,2.5pt){$X$}; & Detection \\
+            \uncover<3->{\tikz[baseline, inner sep=1pt]\node[scale=0.4, thick, draw, circle, fg_tra, text=black] at
+                (0,2.5pt){$Y$};} & \uncover<3->{Assignment} \\
         \end{tabular}
     \end{minipage}%
     \begin{minipage}{0.33\textwidth}
         \begin{tabular}{ll}
-        \tikz[baseline, inner sep=1pt]{\node[scale=2.5, thick, draw, circle, conflict] (c1) at
-            (0,2.8pt){};
-            \node[opacity=0.0, fg_det, scale=0.4] (fake) at (c1.center) {\phantom{$X$}};
-            \path[conflict] (fake.west) edge (fake.east);
-        }
-        & Conflict \\
-        \uncover<3->{\tikz[baseline, inner sep=1pt]{\node[scale=2.5, thick, draw, rectangle, transfac] (c1) at
+            \tikz[baseline, inner sep=1pt]{\node[scale=2.5, thick, draw, circle, conflict] (c1) at
                 (0,2.8pt){};
                 \node[opacity=0.0, fg_det, scale=0.4] (fake) at (c1.center) {\phantom{$X$}};
-                \path[transfac] (fake.west) edge (fake.east);
+                \path[conflict] (fake.west) edge (fake.east);
             }
-        }
-        & \uncover<3->{Outgoing} \\
+            & Conflict \\
+            \uncover<3->{\tikz[baseline, inner sep=1pt]{\node[scale=2.5, thick, draw, rectangle, transfac] (c1) at
+                    (0,2.8pt){};
+                    \node[opacity=0.0, fg_det, scale=0.4] (fake) at (c1.center) {\phantom{$X$}};
+                    \path[transfac] (fake.west) edge (fake.east);
+                }
+            }
+            & \uncover<3->{Outgoing} \\
         \end{tabular}
     \end{minipage}%
     \begin{minipage}{0.33\textwidth}
         \begin{tabular}{ll}
-        \tikz[baseline, inner sep=1pt]{\node[scale=2.5, thick, draw, count] (c1) at
-            (0,2.8pt){};
-            \node[opacity=0.0, fg_det, scale=0.4] (fake) at (c1.center) {\phantom{$X$}};
-            \path[count] (fake.west) edge (fake.east);
-        }
-        & Count \\
-        \uncover<3->{\tikz[baseline, inner sep=1pt]{\node[scale=2.5, thick, draw, rectangle, transfac] (c1) at
+            \tikz[baseline, inner sep=1pt]{\node[scale=2.5, thick, draw, count] (c1) at
                 (0,2.8pt){};
                 \node[opacity=0.0, fg_det, scale=0.4] (fake) at (c1.center) {\phantom{$X$}};
-                \path[transfac] (fake.west) edge (fake.east);
+                \path[count] (fake.west) edge (fake.east);
             }
-        }
-        & \uncover<3->{Incoming} \\
+            & Count \\
+            \uncover<3->{\tikz[baseline, inner sep=1pt]{\node[scale=2.5, thick, draw, rectangle, transfac] (c1) at
+                    (0,2.8pt){};
+                    \node[opacity=0.0, fg_det, scale=0.4] (fake) at (c1.center) {\phantom{$X$}};
+                    \path[transfac] (fake.west) edge (fake.east);
+                }
+            }
+            & \uncover<3->{Incoming} \\
         \end{tabular}
     \end{minipage}
 \end{frame}
@@ -279,15 +334,15 @@
             \path[transfac] (fake.west) edge (fake.east);
         }}
     \begin{minipage}{0.71\textwidth}
-    \begin{itemize}
-          \item Random Variables
         \begin{itemize}
-              \item[\usebox{\detVar}] Detection
-              \item[\usebox{\transVar}] Assignment
-        \end{itemize}
-          \item Factors
-        \begin{itemize}
-              \item[\usebox{\detFac}] Conflict or Detection factor $\psi_{\text{det}}$
+              \item Random Variables
+            \begin{itemize}
+                  \item[\usebox{\detVar}] Detection
+                  \item[\usebox{\transVar}] Assignment
+            \end{itemize}
+              \item Factors
+            \begin{itemize}
+                  \item[\usebox{\detFac}] Conflict or Detection factor $\psi_{\text{det}}$
                 \begin{itemize}
                       \item[] Detection priors
                       \item[] Conflict constraints
@@ -305,8 +360,8 @@
                 \begin{itemize}
                       \item[] Assignment Consistency Constraints
                 \end{itemize}
+            \end{itemize}
         \end{itemize}
-    \end{itemize}
     \end{minipage}
     \begin{minipage}{0.25\textwidth}
         \newcommand{\distancebetweenlayers}{60}

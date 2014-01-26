@@ -18,6 +18,14 @@
 
 \input{content/joint}
 
+\appendix % OPTIONAL
+\newcounter{finalframe}
+\setcounter{finalframe}{\value{framenumber}}
+
+\input{content/backup}
+
+\setcounter{framenumber}{\value{finalframe}}
+
 \end{document}
 
 %%% Local Variables: 

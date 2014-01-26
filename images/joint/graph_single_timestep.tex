@@ -1,7 +1,7 @@
 \begin{scope}
     \begin{scope}[
-        every node/.append style={yslant=0.5,xslant=-1},
-        yslant=0.5,xslant=-1]
+        every node/.append style={yslant=-0.5,xslant=1},
+        yslant=-0.5,xslant=1]
         \node[inner sep=0] (image1) {
             \phantom{\includegraphics[width=\scalingfactor\textwidth]{images/joint/78_seg_crop.png}}
         };
@@ -15,7 +15,7 @@
             \end{scope}
             \begin{scope}[every node/.append style={scale=0.65}]
                 \node[conflict,yshift=-5] (c1) at ($(a1)!0.5!(a5)$) {};
-                \node[conflict, right=of a3, xshift=-20, yshift=20] (c2) {};
+                \node[conflict, right=of a3, xshift=-10, yshift=-10] (c2) {};
                 \node[conflict, yshift=-20] (c3) at (a4) {};
                 \node[count, yshift=-20] (c4)  at ($(a2)!0.5!(a4)$) {};
                 
@@ -29,8 +29,8 @@
                 \path[conflict] (a1) edge (c1);
 
                 \path[conflict] (a2) edge (c2);
-                \path[conflict] (a4) edge[bend left=100] (c2);
-                \path[conflict] (a5) edge[bend left=95] coordinate[pos=0.65](helpercoord1) (c2);
+                \path[conflict] (a4) edge[bend left=50] (c2);
+                \path[conflict] (a5) edge[bend left=65] coordinate[pos=0.65](helpercoord1) (c2);
 
                 \path[conflict] (a3) edge[bend left=10] (c3);
                 \path[conflict] (a4) edge (c3);
