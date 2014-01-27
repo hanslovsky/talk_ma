@@ -434,31 +434,60 @@
     \end{figure}
 \end{frame}
 
-\begin{frame}[shrink=25]
-    \frametitle{Experiments}
-    \begin{figure}
-        \centering
-        \begin{tikzpicture}
-            \node[label={[yshift=-2.5mm]above:\small{Segmentation}}] (seg1) {\includegraphics[width=0.32\textwidth]{images/joint/res/sequence_03/00_colored00_raw.png}};
-            \node[label={[yshift=-2.5mm]above:\small{Region Merging}}, right=of seg1] (seg2) {\includegraphics[width=0.32\textwidth]{images/joint/res/sequence_03/00_colored01_raw.png}};
-            \node[label={[yshift=-2.5mm]above:\small{Region Merging}}, below=of seg1, yshift=7.5mm] (seg3) {\includegraphics[width=0.32\textwidth]{images/joint/res/sequence_03/00_colored02_raw.png}};
-            \node[label={[yshift=-2.5mm]above:\small{Region Merging}}, right=of seg3] (seg4) {\includegraphics[width=0.32\textwidth]{images/joint/res/sequence_03/00_colored03_raw.png}};
-            \node[label={[yshift=-2.5mm]above:\small{Region Merging}}, below=of seg3, yshift=7.5mm] (seg5)  {\includegraphics[width=0.32\textwidth]{images/joint/res/sequence_03/00_colored04_raw.png}};
-            \node[label={[yshift=-2.5mm]above:\small{Tracking}}, right=of seg5] (tra1) {\includegraphics[width=0.32\textwidth]{images/joint/res/sequence_03/00_track_raw.png}};
-        \end{tikzpicture}
-    \end{figure}
-\end{frame}
+% \begin{frame}[shrink=25]
+%     \frametitle{Experiments}
+%     \begin{figure}
+%         \centering
+%         \begin{tikzpicture}
+%             \node[label={[yshift=-2.5mm]above:\small{Segmentation}}] (seg1) {\includegraphics[width=0.32\textwidth]{images/joint/res/sequence_03/00_colored00_raw.png}};
+%             \node[label={[yshift=-2.5mm]above:\small{Region Merging}}, right=of seg1] (seg2) {\includegraphics[width=0.32\textwidth]{images/joint/res/sequence_03/00_colored01_raw.png}};
+%             \node[label={[yshift=-2.5mm]above:\small{Region Merging}}, below=of seg1, yshift=7.5mm] (seg3) {\includegraphics[width=0.32\textwidth]{images/joint/res/sequence_03/00_colored02_raw.png}};
+%             \node[label={[yshift=-2.5mm]above:\small{Region Merging}}, right=of seg3] (seg4) {\includegraphics[width=0.32\textwidth]{images/joint/res/sequence_03/00_colored03_raw.png}};
+%             \node[label={[yshift=-2.5mm]above:\small{Region Merging}}, below=of seg3, yshift=7.5mm] (seg5)  {\includegraphics[width=0.32\textwidth]{images/joint/res/sequence_03/00_colored04_raw.png}};
+%             \node[label={[yshift=-2.5mm]above:\small{Tracking}}, right=of seg5] (tra1) {\includegraphics[width=0.32\textwidth]{images/joint/res/sequence_03/00_track_raw.png}};
+%         \end{tikzpicture}
+%     \end{figure}
+% \end{frame}
+
+% \begin{frame}
+%     \frametitle{Open Challenges}
+%     \renewcommand{\arraystretch}{1.5}
+%     \begin{tabularx}{\textwidth}{X|X}
+%         Challenge & Solution \\ \hline
+%         Region merging errors propagated into tracking result  & Improve region merging (vigra) \\
+%         Tractability & Change hypotheses generation \\
+%         Parameters not optimal & Do exhaustive grid search \\
+%     \end{tabularx}
+% \end{frame}
+
 
 \begin{frame}
-    \frametitle{Open Challenges}
-    \renewcommand{\arraystretch}{1.5}
-    \begin{tabularx}{\textwidth}{X|X}
-        Challenge & Solution \\ \hline
-        Region merging errors propagated into tracking result  & Improve region merging (vigra) \\
-        Tractability & Change hypotheses generation \\
-        Parameters not optimal & Do exhaustive grid search \\
-    \end{tabularx}
+    \frametitle{Limitations of Joint Segmentation and Tracking}
+    \begin{itemize}
+          \item<1-> Errors in the initial oversegmentation cannot be repaired by the tracking.
+          \item<2-> Tractability: A finer oversegmentation results in a larger number of random variables
+        and higher order factors.
+    \end{itemize}
 \end{frame}
+
+
+\begin{frame}
+    \frametitle{Summary}
+    \begin{itemize}
+          \item<1-> Merger resolution for conservation tracking
+        \begin{itemize}
+              \item Post-processing step to prevent loss of tracks of merged objects
+              \item Reconstruct cell identities according to conservation tracking result
+        \end{itemize}
+          \item<2-> Joint segmentation and tracking
+        \begin{itemize}
+              \item Jointly optimize tracking and choose the best segmentation from multiple
+            competing hypotheses
+              \item Tracking in challenging data possible
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
 
 \begin{frame}
     \begin{center}
