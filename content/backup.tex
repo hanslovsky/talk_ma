@@ -84,6 +84,182 @@
     \end{figure}
 \end{frame}
 
+
+\begin{frame}[plain]
+    \frametitle{Factors - Detection/Conflict}
+    \begin{align*}
+        \psi_{\text{det}}(\mathcal{K}_{i\nu}^t, \xi_{i\nu}^t) &=
+        e^{-E_{\text{det}}(\mathcal{K}_{i\nu}^t, \xi_{i\nu}^t)} \\
+        E_{\text{det}}(\mathcal{K}_{i\nu}^t, \xi_{i\nu}^t)&=
+        \begin{cases}
+            A(\mathcal{K}_{i\nu}^t, \xi_{i\nu}^t), &\text{if} \sum_{X \in \mathcal{K}_{i\nu}^t} X = 1 \\ 
+            B(\mathcal{K}_{i\nu}^t, \xi_{i\nu}^t), &\text{if} \sum_{X \in \mathcal{K}_{i\nu}^t} X = 0 \\ 
+            \infty, &\text{otherwise}
+        \end{cases}
+    \end{align*}
+    with
+    \begin{align*}
+        A(\mathcal{K}_{i\nu}^t, \xi_{i\nu}^t) &=-w_{\text{det}} \sum_{X_{i\alpha}^t \in \mathcal{K}_{i\nu}^t}
+        \mathds{1} \left(X_{i\alpha}^t =
+            1\right)\log\left(\hat{P}(X_{i\alpha}^t=1|f_{i\alpha}^t)\right),
+        \\
+        B(\mathcal{K}_{i\nu}^t, \xi_{i\nu}^t) &= -w_{\text{det}} \max_{X_{i\alpha}^t\in\mathcal{K}_{i\nu}^t}
+        \log\left(\hat{P}(X_{i\alpha}^t = 0|f_{i\alpha}^t)\right) + c_{\text{opp}}
+    \end{align*}
+\end{frame}
+
+
+\begin{frame}[plain]
+    \frametitle{Factors - Count}
+    \begin{align*}
+        \psi_{\text{count}}(\{X_{i\alpha}^t\}_{\alpha \in
+            I_i^t},f_{i}^t)&=e^{-E_{\text{count}}(\{(X_{i\alpha}^t,f_{i\alpha}^t)\}_{\alpha \in I_i^t})}, \\
+        E_{\text{count}}(\{X_{i\alpha}^t\}_{\alpha \in I_i^t},f_{i}^t) &=
+        -w_{\text{count}}\log\left(\hat{P}_{\text{count}}\left(\sum_{X \in \{X_{i\alpha}^t\}_{\alpha \in
+                        I_i^t}}X=k|f_i^t\right)\right)
+    \end{align*}
+\end{frame}
+
+
+\begin{frame}[plain]
+    \frametitle{Factors - Outgoing}
+    \begin{align*}
+        \psi_{\mathrm{out}}(X_{i\alpha}^t, \mathcal{Y}_{i\alpha\rightarrow}^{t}, f_{i\alpha}^t,
+        \Xi_{i\alpha\rightarrow}^{t}) &=
+        e^{-E_{\mathrm{out}}(X_{i\alpha}^t, \mathcal{Y}_{i\alpha\rightarrow}^{t}, f_{i\alpha}^t, \Xi_{i\alpha\rightarrow}^{t})} \\
+        E_{\mathrm{out}}(X_{i\alpha}^t, \mathcal{Y}_{i\alpha\rightarrow}^{t}, f_{i\alpha}^t,
+        \Xi_{i\alpha\rightarrow}^{t}) &= E_{\text{dis}}(X_{i\alpha}^t,
+        \mathcal{Y}_{i\alpha\rightarrow}^{t}) \\ \nonumber
+        &+ E_{\text{move}}(X_{i\alpha}^t, \mathcal{Y}_{i\alpha\rightarrow}^{t}, f_{i\alpha}^t,
+        \Xi_{i\alpha\rightarrow}^{t}) \\ \nonumber
+        &+ E_{\text{div}}(X_{i\alpha}^t, \mathcal{Y}_{i\alpha\rightarrow}^{t}, f_{i\alpha}^t,
+        \Xi_{i\alpha\rightarrow}^{t}) \\ \nonumber
+        &+ E_{\text{out,for}}(X_{i\alpha}^t, \mathcal{Y}_{i\alpha\rightarrow}^{t})
+    \end{align*}
+\end{frame}
+
+
+\begin{frame}[plain]
+    \frametitle{Factors - Outgoing: Disappearance}
+    \begin{align*}
+        E_{\mathrm{dis}}(X_{i\alpha}^t,  \mathcal{Y}_{i\alpha\rightarrow}^{t}) &=
+        \begin{cases}
+            C(X_{i\alpha}^t, \mathcal{Y}_{i\alpha\rightarrow}^{t}), & X_{i\alpha}^t = 1 \wedge
+            \sum_{Y\in\mathcal{Y}_{i\alpha\rightarrow}^{t}}Y = 0 \\
+            0, & \text{otherwise}
+        \end{cases} \\
+        C(X_{i\alpha}^t, \mathcal{Y}_{i\alpha\rightarrow}^{t}) &= w_{\mathrm{dis}} \cdot
+        \frac{|X_{i\alpha}^t|} {\max_{\kappa \in I_i^t}|X_{i\kappa}^t|} \\
+        &+ \max\left(E_{\text{move}}(X_{i\alpha}^t, \mathcal{Y}_{i\alpha\rightarrow}^{t}), E_{\text{div}}(X_{i\alpha}^t, \mathcal{Y}_{i\alpha\rightarrow}^{t})\right)
+    \end{align*}
+\end{frame}
+
+
+\begin{frame}[plain]
+    \frametitle{Factors - Outgoing: Division}
+    \begin{align*}
+        E_{\mathrm{div}}&(X_{i\alpha}^t, \mathcal{Y}_{i\alpha\rightarrow}^{t}, f_{i\alpha}^t,
+        \Xi_{i\alpha\rightarrow}^{t}) \\ \nonumber
+        &=-w_{\mathrm{div}} \cdot \frac{|X_{i\alpha}^t|} {\max_{\kappa \in I_i^t}|X_{i\kappa}^t|} \\ \nonumber
+        &\phantom{=}\times
+        \begin{cases}
+            \log (F(X_{i\alpha}^t, \mathcal{Y}_{i\alpha\rightarrow}^{t}, f_{i\alpha}^t,
+            \Xi_{i\alpha\rightarrow}^{t})), & \sum_{Y\in\mathcal{Y}_{i\alpha\rightarrow}^{t}}Y=2 \\
+            0, &\text{otherwise}
+        \end{cases}
+    \end{align*}
+    \begin{alignat}{3}
+        \nonumber
+        F&(X_{i\alpha}^t, \mathcal{Y}_{i\alpha\rightarrow}^{t}, f_{i\alpha}^t,
+        \Xi_{i\alpha\rightarrow}^{t}) \\ \nonumber
+        &=\mathlarger{\mathlarger{\sum}}_{\mathsmaller{\substack{Y_{i\alpha,j_1\kappa_1}^t \in
+                    \mathcal{Y}_{i\alpha\rightarrow}^{t}, \\ \nonumber
+                    Y_{i\alpha,j_2\kappa_2}^t \in \mathcal{Y}_{i\alpha\rightarrow}^{t},\\ \nonumber
+                    Y_{i\alpha,j_2\kappa_2}^t \ne Y_{i\alpha,j_1\kappa_1}^t}}}
+        \Bigg(\hat{P}_{\mathrm{div}}\left(Y_{i\alpha,j_1\kappa_1}^t=1,Y_{i\alpha,j_2\kappa_2^t}=1|f_{i\alpha}^t,f_{j_1\kappa_1}^{t+1},f_{j_2\kappa_2}^{t+1}\right)
+        \\[-35pt] \nonumber
+        &\phantom{=}\quad\quad\quad\quad\quad\quad\quad\;\;\;\;\times\mathds{1}(Y_{i\alpha,j_1\kappa_1}^t=1)\mathds{1}(Y_{i\alpha,j_2\kappa_2}^t=1)\Bigg)
+    \end{alignat}
+\end{frame}
+
+
+\begin{frame}[plain]
+    \frametitle{Factors - Outgoing: Move}
+    \begin{align*}
+        E_{\text{move}}&(X_{i\alpha}^t, \mathcal{Y}_{i\alpha\rightarrow}^{t}, f_{i\alpha}^t,
+        \Xi_{i\alpha\rightarrow}^{t}) \\ \nonumber
+        &=-w_{\text{move}} \cdot \frac{|X_{i\alpha}^t|}{\max_{\kappa \in I_i^t}|X_{i\kappa}^t|} \\
+        \nonumber
+        &\phantom{=}\times
+        \begin{cases}
+            \log (G(X_{i\alpha}^t, \mathcal{Y}_{i\alpha\rightarrow}^{t}, f_{i\alpha}^t,
+            \Xi_{i\alpha\rightarrow}^{t})), & \sum_{Y\in\mathcal{Y}_{i\alpha\rightarrow}^{t}}Y=1 \\
+            0, &\text{otherwise},
+        \end{cases}
+    \end{align*}
+    \begin{align*}
+        G&(X_{i\alpha}^t, \mathcal{Y}_{i\alpha\rightarrow}^{t}, f_{i\alpha}^t,
+        \Xi_{i\alpha\rightarrow}^{t}) \\ \nonumber
+        &=\mathlarger{\mathlarger{\sum}}_{\mathsmaller{\substack{Y_{i\alpha,j\kappa}^t \in \mathcal{Y}_{i\alpha\rightarrow}^{t}}}}
+        \Bigg(\hat{P}_{\mathrm{move}}\left(Y_{i\alpha,j\kappa}^t=1|f_{i\alpha}^t,f_{j\kappa}^{t+1}\right)
+        \cdot\mathds{1}(Y_{i\alpha,j\kappa}^t=1)\Bigg)
+    \end{align*}
+\end{frame}
+
+
+\begin{frame}[plain]
+    \frametitle{Factors - Outgoing: Forbidden}
+    \begin{align*}
+        E_{\text{out,for}}(X_{i\alpha}^t, \mathcal{Y}_{i\alpha\rightarrow}^{t})=
+        \begin{cases}
+            \infty, & \sum_{Y \in \mathcal{Y}_{i\alpha\rightarrow}^{t}}Y > 2 \\
+            \infty, & \sum_{Y \in \mathcal{Y}_{i\alpha\rightarrow}^{t}}Y > 0 \wedge X_{i\alpha}^t = 0 \\
+            0, \text{otherwise}
+        \end{cases}
+    \end{align*}
+\end{frame}
+
+
+\begin{frame}[plain]
+    \frametitle{Factors - Incoming}
+    \begin{align*}
+        \psi_{\mathrm{in}}(X_{j\beta}^{t+1}, \mathcal{Y}_{\rightarrow j\beta}^{t})
+        &= e^{-E_{\text{in}}(X_{j\beta}^{t+1},  \mathcal{Y}_{\rightarrow j\beta}^{t})} \\
+        E_\text{in}(X_{j\beta}^{t+1},  \mathcal{Y}_{\rightarrow j\beta}^{t}) &= E_{\text{app}}(X_{j\beta}^{t+1},
+        \mathcal{Y}_{\rightarrow j\beta}^{t}) \\
+        &+ E_{\text{in,for}}(X_{j\beta}^{t+1},  \mathcal{Y}_{\rightarrow j\beta}^{t})
+    \end{align*}
+\end{frame}
+
+
+\begin{frame}[plain]
+    \frametitle{Factors - Outgoing: Appearance}
+    \begin{align*}
+        E_{\text{app}}&(X_{j\beta}^{t+1}, \mathcal{Y}_{\rightarrow, j\beta}^t) \\ \nonumber
+        &=
+        \begin{cases}
+            \frac{|X_{j\beta}^{t+1}|} {\max_{\kappa \in I_j^{t+1}}|X_{j\kappa}^{t+1}|} \cdot w_{\mathrm{app}}, & X_{j\beta}^{t+1} = 1 \wedge \sum_{Y\in\mathcal{Y}_{\rightarrow, j\beta}^t}Y = 0 \\
+            0, & \mathrm{otherwise}
+        \end{cases}    
+    \end{align*}
+\end{frame}
+
+
+\begin{frame}[plain]
+    \frametitle{Factors - Incoming: Forbidden}
+    \begin{align*}
+        E_{\text{in,for}}(X_{j\beta}^{t+1},  \mathcal{Y}_{\rightarrow j\beta}^{t})=
+        \begin{cases}
+        \infty, & \sum_{Y \in \mathcal{Y}_{\rightarrow j\beta}^{t}}Y >
+        1 \\
+        \infty, & \sum_{Y \in \mathcal{Y}_{\rightarrow j\beta}^{t}}Y > 0 \wedge X_{j\beta}^{t+1} =
+        0 \\
+        0, & \text{otherwise}
+        \end{cases}
+    \end{align*}
+\end{frame}
+
+
 %%% Local Variables: 
 %%% mode: latex
 %%% TeX-master: "../main"
