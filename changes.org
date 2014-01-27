@@ -1,3 +1,6 @@
+#+TITLE: Changes for Janelia
+#+OPTIONS: toc:nil
+
 * Changes in preparation for Janelia
   - p02: Divisions und einzelne Events erklären
   - p03: False positive detection und merging event
