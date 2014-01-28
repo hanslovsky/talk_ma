@@ -1,6 +1,6 @@
 \section{Joint Segmentation and Tracking}
 
-\begin{frame}{Motivation}
+\begin{frame}{Joint Segmentation and Tracking - Motivation}
     \begin{figure}
         \centering
         \begin{subfigure}[t]{0.48\textwidth}
@@ -18,8 +18,55 @@
 
 \end{frame}
 
+
+\begin{frame}{Joint Segmentation and Tracking - Basic Idea}
+    \begin{tikzpicture}
+        \node[label=left:$t\phantom{+1}$] (s1)
+        {\includegraphics[width=0.17\textwidth]{images/joint/concept/chaingraph-01.png}};
+        \node[label=left:$t+1$, below=of s1.center] (s2)
+        {\includegraphics[width=0.17\textwidth]{images/joint/concept/chaingraph-02.png}};
+        \node[label=left:$t+2$, below=of s2.center] (s3)
+        {\includegraphics[width=0.17\textwidth]{images/joint/concept/chaingraph-03.png}};
+        \node[above=of s1.center, align=center] {Foreground\\Mask};
+        \uncover<2->{
+            \node[right=of s1.center, xshift=12pt] (t1)
+            {\includegraphics[width=0.17\textwidth]{images/joint/concept/overseg-01.png}};
+            \node[ below=of t1.center] (t2)
+            {\includegraphics[width=0.17\textwidth]{images/joint/concept/overseg-02.png}};
+            \node[below=of t2.center] (t3)
+            {\includegraphics[width=0.17\textwidth]{images/joint/concept/overseg-03.png}};
+            \node[above=of t1.center, align=center] {Over-\\Segmentation};
+        }
+        \uncover<3->{
+            \node[right=of t1.center, xshift=12pt] (m1)
+            {\includegraphics[width=0.17\textwidth]{images/joint/concept/res1-01.png}};
+            \node[ below=of m1.center] (m2)
+            {\includegraphics[width=0.17\textwidth]{images/joint/concept/res1-02.png}};
+            \node[below=of m2.center] (m3)
+            {\includegraphics[width=0.17\textwidth]{images/joint/concept/res1-03.png}};
+            \node[above=of m1.center, align=center] (rm) {Possible\\Tracking};
+            \node[right=of m1.center, xshift=12pt] (n1)
+            {\includegraphics[width=0.17\textwidth]{images/joint/concept/res2-01.png}};
+            \node[ below=of n1.center] (n2)
+            {\includegraphics[width=0.17\textwidth]{images/joint/concept/res2-02.png}};
+            \node[below=of n2.center] (n3)
+            {\includegraphics[width=0.17\textwidth]{images/joint/concept/res2-03.png}};
+            \node[above=of n1.center, align=center] (rn) {Possible\\Tracking};
+            \begin{scope}[overlay]%
+                \uncover<5->{
+                    \node[color=red!90, opacity=0.7, font=\Huge, xscale=3, yscale=10] at (m2.center) {\xmark};
+                    \node[color=green!90, opacity=0.7, font=\Huge, xscale=3, yscale=10] at (n2.center) {\cmark};
+                }
+                
+
+            \end{scope}
+        }
+    \end{tikzpicture}
+\end{frame}
+
+
 \begin{frame}
-    \frametitle{Workflow}
+    \frametitle{Joint Segmentation and Tracking - Workflow}
     \begin{figure}
         \centering
         \scalebox{0.65}{
@@ -30,19 +77,9 @@
     \end{figure}
 \end{frame}
 
-% \begin{frame}
-%     \frametitle{Definitions}
-%     \begin{itemize}
-%           \item \emph{Segment} or \emph{superpixel/-voxel}: Smallest unit in a segmentation
-%           \item \emph{Region}: Any single segment or union of two neighboring regions
-%           \item \emph{Conflict}: Set of overlapping and thus contradicting regions
-%           \item \emph{Connected Component}: A region that has no neighbors (is completely surrounded
-%         by background)
-%     \end{itemize}
-% \end{frame}
 
 \begin{frame}
-    \frametitle{Definitions - Example}
+    \frametitle{From Raw Data to Segmentation Hypotheses}
     \begin{minipage}[t][0.4\textheight][t]{\textwidth}%
         \begin{figure}%
             \centering%
@@ -160,7 +197,7 @@
 
 
 \begin{frame}
-    \frametitle{From Regions to Factor Graph}
+    \frametitle{From Segmentation Hypotheses to Factor Graph}
     \begin{minipage}[t][0.4\textheight][t]{\textwidth}%
         \begin{figure}
             \centering
@@ -221,7 +258,7 @@
 
 
 \begin{frame}
-    \frametitle{Graphical Model}
+    \frametitle{Joint Segmentation and Tracking - Graphical Model}
     \centering
     \newcommand{\distancebetweenlayers}{90}
     \newcommand{\scalingfactor}{0.3}
@@ -397,7 +434,7 @@
 % \end{frame}
 
 \begin{frame}
-    \frametitle{Experiments}
+    \frametitle{Joint Segmentation and Tracking - Experiments}
     \begin{figure}
         \centering
         \begin{tikzpicture}
@@ -416,7 +453,7 @@
 \end{frame}
 
 \begin{frame}
-    \frametitle{Experiments}
+    \frametitle{Joint Segmentation and Tracking - Experiments}
     \begin{figure}
         \centering
         \begin{tikzpicture}
@@ -433,32 +470,6 @@
         \end{tikzpicture}
     \end{figure}
 \end{frame}
-
-% \begin{frame}[shrink=25]
-%     \frametitle{Experiments}
-%     \begin{figure}
-%         \centering
-%         \begin{tikzpicture}
-%             \node[label={[yshift=-2.5mm]above:\small{Segmentation}}] (seg1) {\includegraphics[width=0.32\textwidth]{images/joint/res/sequence_03/00_colored00_raw.png}};
-%             \node[label={[yshift=-2.5mm]above:\small{Region Merging}}, right=of seg1] (seg2) {\includegraphics[width=0.32\textwidth]{images/joint/res/sequence_03/00_colored01_raw.png}};
-%             \node[label={[yshift=-2.5mm]above:\small{Region Merging}}, below=of seg1, yshift=7.5mm] (seg3) {\includegraphics[width=0.32\textwidth]{images/joint/res/sequence_03/00_colored02_raw.png}};
-%             \node[label={[yshift=-2.5mm]above:\small{Region Merging}}, right=of seg3] (seg4) {\includegraphics[width=0.32\textwidth]{images/joint/res/sequence_03/00_colored03_raw.png}};
-%             \node[label={[yshift=-2.5mm]above:\small{Region Merging}}, below=of seg3, yshift=7.5mm] (seg5)  {\includegraphics[width=0.32\textwidth]{images/joint/res/sequence_03/00_colored04_raw.png}};
-%             \node[label={[yshift=-2.5mm]above:\small{Tracking}}, right=of seg5] (tra1) {\includegraphics[width=0.32\textwidth]{images/joint/res/sequence_03/00_track_raw.png}};
-%         \end{tikzpicture}
-%     \end{figure}
-% \end{frame}
-
-% \begin{frame}
-%     \frametitle{Open Challenges}
-%     \renewcommand{\arraystretch}{1.5}
-%     \begin{tabularx}{\textwidth}{X|X}
-%         Challenge & Solution \\ \hline
-%         Region merging errors propagated into tracking result  & Improve region merging (vigra) \\
-%         Tractability & Change hypotheses generation \\
-%         Parameters not optimal & Do exhaustive grid search \\
-%     \end{tabularx}
-% \end{frame}
 
 
 \begin{frame}

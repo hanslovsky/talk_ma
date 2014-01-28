@@ -58,7 +58,7 @@
     \end{figure}
 \end{frame}
 
-\begin{frame}{Hypotheses Graph}
+\begin{frame}{Segmentation and Assignment Hypotheses}
     % \begin{figure}
     \begin{center}%
         \only<1-3>{%
@@ -69,7 +69,7 @@
                         \input{images/cell_tracking/hypotheses-graph.tex}%
                         \begin{scope}[overlay]% ignore this scope for bounding box calculation
                         \visible<2-3>{
-                            \node[arrowstyle=2, rotate=30, below left=of x13, yshift=60, xshift=10]{Is this a cell?};
+                            \node[arrowstyle=2, rotate=30, below left=of x12, yshift=60, xshift=10]{Is this a cell?};
                         }
                         \visible<3>{
                             \node[arrowstyle=2, rotate=160, xshift=-100]
@@ -98,3 +98,39 @@
     %     \label{fig:cell-tracking-hypotheses}
     % \end{figure}
 \end{frame}
+
+
+\begin{frame}[shrink=10]
+    \frametitle{Tracking-by-Assignment in Difficulat Data: Undersegmentation}
+    \begin{figure}%
+        \centering%
+        \begin{minipage}{\textwidth}%
+            \includegraphics<1->[width=0.95\textwidth]{images/cell_tracking/difficult_raw.png}%
+        \end{minipage}%
+        \\%
+        \begin{minipage}{1.0\textwidth}
+            \phantom{\includegraphics<1|only@1>[width=0.95\textwidth]{images/cell_tracking/difficult_segmentation.png}}%
+            \includegraphics<2->[width=0.95\textwidth]{images/cell_tracking/difficult_segmentation.png}%
+        \end{minipage}%
+    \end{figure}%
+    \setbeamercovered{transparent}
+    \begin{itemize}
+          \item<3-> Conservation Tracking with Merger Resolution
+        \begin{itemize}
+              \item<4-8> Detect merged objects in tracking graphical model.
+              \item<5-> \alert<9->{Resolve mergers and reconstruct lost identities/tracks.}
+        \end{itemize}
+          \item<6-> Joint Segmentation and Tracking
+        \begin{itemize}
+              \item<7-> \alert<9->{Create multiple, possibly competing segmentation hypotheses.}
+              \item<8-> \alert<9->{Jointly optimize segmentation and tracking.}
+        \end{itemize}
+    \end{itemize}
+    \setbeamercovered{invisible}
+\end{frame}
+
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "../main"
+%%% End: 
